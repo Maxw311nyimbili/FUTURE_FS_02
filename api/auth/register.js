@@ -1,6 +1,6 @@
 // api/auth/register.js
 import { connectDB } from '../../lib/mongodb.js';
-import { User } from '../../models/User';
+import { User } from '../../models/User.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import { sendVerificationEmail } from '../../lib/emailService';
