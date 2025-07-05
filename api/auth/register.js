@@ -1,9 +1,10 @@
 // api/auth/register.js
+/* eslint-env node */
 import { connectDB } from '../../lib/mongodb.js';
 import { User } from '../../models/User.js';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
-import { sendVerificationEmail } from '../../lib/emailService';
+import { sendVerificationEmail } from '../../lib/emailService.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
