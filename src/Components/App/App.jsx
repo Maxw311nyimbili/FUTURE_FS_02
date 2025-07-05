@@ -14,7 +14,7 @@ const Banner = () => {
             title: "Best Furniture Collection for Your Interior",
             subTitle: "Welcome to Chairs",
             description: "Transform your space with our premium furniture collection designed for modern living",
-            image: "/src/assets/Banner/chair-1.png",
+            image: "images/Banner/chair-1.png",
             ctaText: "Shop Now",
             bgGradient: "from-blue-50 to-cyan-50"
         },
@@ -23,7 +23,7 @@ const Banner = () => {
             title: "Comfort Meets Elegance",
             subTitle: "Premium Collection",
             description: "Discover handcrafted furniture that combines comfort with sophisticated design",
-            image: "/src/assets/Banner/chair-2.png",
+            image: "images/Banner/chair-2.png",
             ctaText: "Explore",
             bgGradient: "from-green-50 to-emerald-50"
         },
@@ -32,7 +32,7 @@ const Banner = () => {
             title: "Modern Living Redefined",
             subTitle: "Contemporary Style",
             description: "Experience the perfect blend of functionality and aesthetic appeal",
-            image: "/src/assets/Banner/chair-3.png",
+            image: "images/Banner/chair-3.png",
             ctaText: "Discover",
             bgGradient: "from-purple-50 to-pink-50"
         },
@@ -41,7 +41,7 @@ const Banner = () => {
             title: "Luxury at Its Finest",
             subTitle: "Designer Collection",
             description: "Elevate your home with our exclusive luxury furniture pieces",
-            image: "/src/assets/Banner/chair-4.png",
+            image: "images/Banner/chair-4.png",
             ctaText: "Shop Luxury",
             bgGradient: "from-amber-50 to-orange-50"
         },
@@ -310,31 +310,31 @@ const Brand = () => {
     const brands = [
         {
             id: 1,
-            image: "/src/assets/brands/brand_1.png"
+            image: "images/brands/brand_1.png"
         },
         {
             id: 2,
-            image: "/src/assets/brands/brand_2.png"
+            image: "images/brands/brand_2.png"
         },
         {
             id: 3,
-            image: "/src/assets/brands/brand_3.png"
+            image: "images/brands/brand_3.png"
         },
         {
             id: 4,
-            image: "/src/assets/brands/brand_4.png"
+            image: "images/brands/brand_4.png"
         },
         {
             id: 5,
-            image: "/src/assets/brands/brand_5.png"
+            image: "images/brands/brand_5.png"
         },
         {
             id: 6,
-            image: "/src/assets/brands/brand_6.png"
+            image: "images/brands/brand_6.png"
         }, 
         {
             id: 7,
-            image: "/src/assets/brands/brand_7.png"
+            image: "images/brands/brand_7.png"
         },
     ];
 
