@@ -1,5 +1,5 @@
 // api/auth/register.js
-import { connectDB } from '../../lib/mongodb';
+import { connectDB } from '../../lib/mongodb.js';
 import { User } from '../../models/User';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
