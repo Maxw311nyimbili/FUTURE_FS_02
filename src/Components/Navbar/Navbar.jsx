@@ -867,96 +867,6 @@
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// Cart Modal Component
-const CartModal = ({ isCartOpen, setIsCartOpen, cartItems, updateCartQuantity, removeFromCart }) => {
-    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    return (
-        <>
-            {isCartOpen && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-hidden shadow-2xl">
-                        {/* Cart Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                            <h2 className="text-xl font-semibold text-[#272343]">Shopping Cart</h2>
-                            <button 
-                                onClick={() => setIsCartOpen(false)}
-                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                            >
-                                <X size="20px" color="#636270" />
-                            </button>
-                        </div>
-
-                        {/* Cart Items */}
-                        <div className="flex-1 overflow-y-auto max-h-96">
-                            {cartItems.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center py-12 px-6">
-                                    <ShoppingCart size="48px" color="#636270" className="opacity-50 mb-4" />
-                                    <p className="text-[#636270] text-center">Your cart is empty</p>
-                                    <p className="text-sm text-[#636270] text-center mt-2">Add some items to get started</p>
-                                </div>
-                            ) : (
-                                <div className="p-4 space-y-4">
-                                    {cartItems.map((item) => (
-                                        <div key={item.id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                                            <img 
-                                                src={item.image} 
-                                                alt={item.name}
-                                                className="w-16 h-16 object-cover rounded-lg"
-                                            />
-                                            <div className="flex-1">
-                                                <h3 className="font-medium text-[#272343] text-sm">{item.name}</h3>
-                                                <p className="text-xs text-[#636270] mt-1">{item.color || 'Default'}</p>
-                                                <p className="text-sm font-semibold text-[#029fae] mt-1">
-                                                    ${item.price?.toFixed(2) || '0.00'}
-                                                </p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <button 
-                                                    onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
-                                                >
-                                                    <Minus size="14px" color="#636270" />
-                                                </button>
-                                                <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                                                <button 
-                                                    onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
-                                                >
-                                                    <Plus size="14px" color="#636270" />
-                                                </button>
-                                                <button 
-                                                    onClick={() => removeFromCart(item.id)}
-                                                    className="w-8 h-8 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition-colors ml-2"
-                                                >
-                                                    <Trash2 size="14px" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Cart Footer */}
-                        {cartItems.length > 0 && (
-                            <div className="p-6 border-t border-gray-100">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-lg font-semibold text-[#272343]">Total:</span>
-                                    <span className="text-lg font-bold text-[#007580]">${totalPrice.toFixed(2)}</span>
-                                </div>
-                                <button className="w-full bg-[#007580] hover:bg-[#005f67] text-white py-3 rounded-lg font-medium transition-colors">
-                                    Checkout
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-        </>
-    );
-};
-
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -1484,6 +1394,228 @@ const Navbar = () => {
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Cart Modal */}
+
+            {/* Cart Modal */}
+            {isCartOpen && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-hidden shadow-2xl">
+                        {/* Cart Header */}
+                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                            <h2 className="text-xl font-semibold text-[#272343]">Shopping Cart</h2>
+                            <button 
+                                onClick={() => setIsCartOpen(false)}
+                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                                <X size="20px" color="#636270" />
+                            </button>
+                        </div>
+
+                        {/* Cart Items */}
+                        <div className="flex-1 overflow-y-auto max-h-96">
+                            {cartItems.length === 0 ? (
+                                <div className="flex flex-col items-center justify-center py-12 px-6">
+                                    <ShoppingCart size="48px" color="#636270" className="opacity-50 mb-4" />
+                                    <p className="text-[#636270] text-center">Your cart is empty</p>
+                                    <p className="text-sm text-[#636270] text-center mt-2">Add some items to get started</p>
+                                </div>
+                            ) : (
+                                <div className="p-4 space-y-4">
+                                    {cartItems.map((item) => (
+                                        <div key={item.id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                                            <img 
+                                                src={item.image} 
+                                                alt={item.name}
+                                                className="w-16 h-16 object-cover rounded-lg"
+                                            />
+                                            <div className="flex-1">
+                                                <h3 className="font-medium text-[#272343] text-sm">{item.name}</h3>
+                                                <p className="text-xs text-[#636270] mt-1">{item.color || 'Default'}</p>
+                                                <p className="text-sm font-semibold text-[#029fae] mt-1">
+                                                    ${item.price?.toFixed(2) || '0.00'}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <button 
+                                                    onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
+                                                >
+                                                    <Minus size="14px" color="#636270" />
+                                                </button>
+                                                <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                                                <button 
+                                                    onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
+                                                >
+                                                    <Plus size="14px" color="#636270" />
+                                                </button>
+                                                <button 
+                                                    onClick={() => removeFromCart(item.id)}
+                                                    className="w-8 h-8 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition-colors ml-2"
+                                                >
+                                                    <Trash2 size="14px" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Cart Footer */}
+                        {cartItems.length > 0 && (
+                            <div className="p-6 border-t border-gray-100">
+                                <div className="flex justify-between items-center mb-4">
+                                    <span className="text-lg font-semibold text-[#272343]">Total:</span>
+                                    <span className="text-lg font-bold text-[#029fae]">${getCartTotal().toFixed(2)}</span>
+                                </div>
+                                <button className="w-full bg-[#029fae] hover:bg-[#027a85] text-white py-3 rounded-lg font-medium transition-colors">
+                                    Checkout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Auth Modal */}
+            {isAuthModalOpen && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+                        {/* Auth Header */}
+                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                            <h2 className="text-xl font-semibold text-[#272343]">
+                                {authMode === 'login' ? 'Login' : 'Register'}
+                            </h2>
+                            <button 
+                                onClick={closeAuthModal}
+                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                                <X size="20px" color="#636270" />
+                            </button>
+                        </div>
+
+                        {/* Auth Form */}
+                        <form onSubmit={handleAuth} className="p-6">
+                            {error && (
+                                <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+                                    <AlertCircle size="16px" className="text-red-500" />
+                                    <span className="text-sm text-red-700">{error}</span>
+                                </div>
+                            )}
+                            
+                            {success && (
+                                <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                                    <CheckCircle size="16px" className="text-green-500" />
+                                    <span className="text-sm text-green-700">{success}</span>
+                                </div>
+                            )}
+
+                            <div className="space-y-4">
+                                {authMode === 'register' && (
+                                    <div>
+                                        <label className="block text-sm font-medium text-[#272343] mb-2">
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleInputChange}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-colors"
+                                            placeholder="Enter your full name"
+                                        />
+                                    </div>
+                                )}
+
+                                <div>
+                                    <label className="block text-sm font-medium text-[#272343] mb-2">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-colors"
+                                        placeholder="Enter your email"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="block text-sm font-medium text-[#272343] mb-2">
+                                        Password
+                                    </label>
+                                    <div className="relative">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            name="password"
+                                            value={formData.password}
+                                            onChange={handleInputChange}
+                                            className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-colors"
+                                            placeholder="Enter your password"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#636270] hover:text-[#029fae] transition-colors"
+                                        >
+                                            {showPassword ? <EyeOff size="18px" /> : <Eye size="18px" />}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {authMode === 'register' && (
+                                    <div>
+                                        <label className="block text-sm font-medium text-[#272343] mb-2">
+                                            Confirm Password
+                                        </label>
+                                        <div className="relative">
+                                            <input
+                                                type={showConfirmPassword ? "text" : "password"}
+                                                name="confirmPassword"
+                                                value={formData.confirmPassword}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-colors"
+                                                placeholder="Confirm your password"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#636270] hover:text-[#029fae] transition-colors"
+                                            >
+                                                {showConfirmPassword ? <EyeOff size="18px" /> : <Eye size="18px" />}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-[#029fae] hover:bg-[#027a85] text-white py-3 rounded-lg font-medium transition-colors mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? 'Processing...' : (authMode === 'login' ? 'Login' : 'Register')}
+                            </button>
+
+                            <div className="text-center mt-4">
+                                <button
+                                    type="button"
+                                    onClick={switchAuthMode}
+                                    className="text-sm text-[#029fae] hover:text-[#027a85] transition-colors"
+                                >
+                                    {authMode === 'login' 
+                                        ? "Don't have an account? Register here" 
+                                        : "Already have an account? Login here"
+                                    }
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}
