@@ -1007,7 +1007,7 @@ const Navbar = () => {
             const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
             const body = authMode === 'login' 
                 ? { email: formData.email, password: formData.password }
-                : { name: formData.name, email: formData.email, password: formData.password };
+                : { name: formData.name, email: formData.email, password: formData.password, confirmPassword: formData.confirmPassword };
 
             const response = await fetch(endpoint, {
                 method: 'POST',
