@@ -16,6 +16,11 @@ export default async function handler(req, res) {
     
     const { name, email, password, confirmPassword } = req.body;
 
+    console.log("name", name);
+    console.log("email", email);
+    console.log("password", password);
+    console.log("confirm password", confirmPassword);
+
     // Validate input
     if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: 'All fields are required' });
