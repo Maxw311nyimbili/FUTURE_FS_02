@@ -98,7 +98,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Index for faster queries
-userSchema.index({ email: 1 });
+
 userSchema.index({ verificationToken: 1 });
 userSchema.index({ resetPasswordToken: 1 });
 
