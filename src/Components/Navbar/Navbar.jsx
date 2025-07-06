@@ -867,6 +867,96 @@
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
+// Cart Modal Component
+const CartModal = ({ isCartOpen, setIsCartOpen, cartItems, updateCartQuantity, removeFromCart }) => {
+    const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    return (
+        <>
+            {isCartOpen && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-hidden shadow-2xl">
+                        {/* Cart Header */}
+                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                            <h2 className="text-xl font-semibold text-[#272343]">Shopping Cart</h2>
+                            <button 
+                                onClick={() => setIsCartOpen(false)}
+                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                                <X size="20px" color="#636270" />
+                            </button>
+                        </div>
+
+                        {/* Cart Items */}
+                        <div className="flex-1 overflow-y-auto max-h-96">
+                            {cartItems.length === 0 ? (
+                                <div className="flex flex-col items-center justify-center py-12 px-6">
+                                    <ShoppingCart size="48px" color="#636270" className="opacity-50 mb-4" />
+                                    <p className="text-[#636270] text-center">Your cart is empty</p>
+                                    <p className="text-sm text-[#636270] text-center mt-2">Add some items to get started</p>
+                                </div>
+                            ) : (
+                                <div className="p-4 space-y-4">
+                                    {cartItems.map((item) => (
+                                        <div key={item.id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                                            <img 
+                                                src={item.image} 
+                                                alt={item.name}
+                                                className="w-16 h-16 object-cover rounded-lg"
+                                            />
+                                            <div className="flex-1">
+                                                <h3 className="font-medium text-[#272343] text-sm">{item.name}</h3>
+                                                <p className="text-xs text-[#636270] mt-1">{item.color || 'Default'}</p>
+                                                <p className="text-sm font-semibold text-[#029fae] mt-1">
+                                                    ${item.price?.toFixed(2) || '0.00'}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <button 
+                                                    onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
+                                                >
+                                                    <Minus size="14px" color="#636270" />
+                                                </button>
+                                                <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+                                                <button 
+                                                    onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
+                                                >
+                                                    <Plus size="14px" color="#636270" />
+                                                </button>
+                                                <button 
+                                                    onClick={() => removeFromCart(item.id)}
+                                                    className="w-8 h-8 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition-colors ml-2"
+                                                >
+                                                    <Trash2 size="14px" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Cart Footer */}
+                        {cartItems.length > 0 && (
+                            <div className="p-6 border-t border-gray-100">
+                                <div className="flex justify-between items-center mb-4">
+                                    <span className="text-lg font-semibold text-[#272343]">Total:</span>
+                                    <span className="text-lg font-bold text-[#007580]">${totalPrice.toFixed(2)}</span>
+                                </div>
+                                <button className="w-full bg-[#007580] hover:bg-[#005f67] text-white py-3 rounded-lg font-medium transition-colors">
+                                    Checkout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </>
+    );
+};
+
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -1397,94 +1487,7 @@ const Navbar = () => {
                     </div>
                 </div>
             )}
-
-            {/* Cart Modal */}
-            {isCartOpen && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-hidden shadow-2xl">
-                        {/* Cart Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                            <h2 className="text-xl font-semibold text-[#272343]">Shopping Cart</h2>
-                            <button 
-                                onClick={() => setIsCartOpen(false)}
-                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                            >
-                                <X size="20px" color="#636270" />
-                            </button>
-                        </div>
-
-                        {/* Cart Items */}
-                        <div className="flex-1 overflow-y-auto max-h-96">
-                            {cartItems.length === 0 ? (
-                                <div className="flex flex-col items-center justify-center py-12 px-6">
-                                    <ShoppingCart size="48px" color="#636270" className="opacity-50 mb-4" />
-                                    <p className="text-[#636270] text-center">Your cart is empty</p>
-                                    <p className="text-sm text-[#636270] text-center mt-2">Add some items to get started</p>
-                                </div>
-                            ) : (
-                                <div className="p-4 space-y-4">
-                                    {cartItems.map((item) => (
-                                        <div key={item.id} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                                            <img 
-                                                src={item.image || `https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=100&h=100&fit=crop`} 
-                                                alt={item.name}
-                                                className="w-16 h-16 object-cover rounded-lg"
-                                            />
-                                            <div className="flex-1">
-                                                <h3 className="font-medium text-[#272343] text-sm">{item.name}</h3>
-                                                <p className="text-xs text-[#636270] mt-1">{item.color || 'Default'}</p>
-                                                <p className="text-sm font-semibold text-[#029fae] mt-1">
-                                                    ${item.price?.toFixed(2) || '0.00'}
-                                                </p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <button 
-                                                    onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
-                                                >
-                                                    <Minus size="14px" color="#636270" />
-                                                </button>
-                                                <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
-                                                <button 
-                                                    onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                                                    className="w-8 h-8 flex items-center justify-center bg-white border rounded-lg hover:bg-gray-100 transition-colors"
-                                                >
-                                                    <Plus size="14px" color="#636270" />
-                                                </button>
-                                                <button 
-                                                    onClick={() => removeFromCart(item.id)}
-                                                    className="w-8 h-8 flex items-center justify-center text-red-500 hover:bg-red-50 rounded-lg transition-colors ml-2"
-                                                >
-                                                    <Trash2 size="14px" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Cart Footer */}
-                        {cartItems.length > 0 && (
-                            <div className="border-t border-gray-100 p-6">
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className="text-lg font-semibold text-[#272343]">Total:</span>
-                                    <span className="text-xl font-bold text-[#029fae]">${getCartTotal().toFixed(2)}</span>
-                                </div>
-                                <div className="space-y-3">
-                                    <button className="w-full bg-[#029fae] text-white py-3 rounded-lg hover:bg-[#027a85] transition-colors font-medium">
-                                        Proceed to Checkout
-                                    </button>
-                                    <button 
-                                        onClick={() => setIsCartOpen(false)}
-                                        className="w-full border border-[#029fae] text-[#029fae] py-3 rounded-lg hover:bg-[#029fae]/5 transition-colors font-medium"
-                                    ></button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
+            
 
             {/* Auth Modal */}
             {isAuthModalOpen && (
