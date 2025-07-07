@@ -1,40 +1,89 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from './../Components/Navbar/Navbar';
-import Home from "../Pages/Home/Home";
-import Auth from "../Pages/Auth/Auth";
-import Login from "../Pages/Auth/Login/Login";
-import Register from "../Pages/Auth/Register/Register";
-import Error from "../Pages/Error/Error";
-import AuthCheck from "../AuthCheck/AuthCheck";
-import Footer from "../Components/Footer/Footer";
 import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Layout Components
+import Navbar from '../Components/Navbar/Navbar';
+import Footer from '../Components/Footer/Footer';
+
+// Pages
+import Home from '../Pages/Home/Home';
+import Auth from '../Pages/Auth/Auth';
+import Login from '../Pages/Auth/Login/Login';
+import Register from '../Pages/Auth/Register/Register';
+import Error from '../Pages/Error/Error';
+
+// Auth check
+import AuthCheck from '../AuthCheck/AuthCheck';
 
 const MainLayout = () => {
-    // State for Navbar props
     const [user, setUser] = useState(null);
     const [cartItems, setCartItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
     const [orders, setOrders] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
-    // Handler functions
-    const handleLogin = (userData) => {
-        setUser(userData);
+    // Auth handlers
+    const handleLogin = (userData) => setUser(userData);
+    const handleLogout = () => setUser(null);
+    const handleSearchChange = (e) => setSearchQuery(e.target.value);
+
+    // Cart handlers
+    const addToCart = (product) => {
+        if (!user) {
+            alert('Please login to add items to cart');
+            return;
+        }
+
+        const existingItem = cartItems.find(item => item.id === product.id);
+        if (existingItem) {
+            setCartItems(cartItems.map(item =>
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            ));
+        } else {
+            setCartItems([...cartItems, {
+                ...product,
+                quantity: 1,
+                name: product.title,
+                color: 'Default',
+            }]);
+        }
     };
 
-    const handleLogout = () => {
-        setUser(null);
+    const updateCartQuantity = (id, quantity) => {
+        if (quantity <= 0) {
+            removeFromCart(id);
+            return;
+        }
+        setCartItems(cartItems.map(item =>
+            item.id === id ? { ...item, quantity } : item
+        ));
     };
 
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
+    const removeFromCart = (id) => {
+        setCartItems(cartItems.filter(item => item.id !== id));
     };
 
-    // Add other handler functions as needed (for cart, wishlist, etc.)
+    // Wishlist handlers
+    const addToWishlist = (product) => {
+        if (!user) {
+            alert('Please login to add items to wishlist');
+            return;
+        }
+
+        const exists = wishlistItems.some(item => item.id === product.id);
+        if (!exists) {
+            setWishlistItems([...wishlistItems, product]);
+        }
+    };
+
+    const removeFromWishlist = (id) => {
+        setWishlistItems(wishlistItems.filter(item => item.id !== id));
+    };
 
     return (
         <BrowserRouter>
-            {/* navbar with all required props */}
             <Navbar
                 user={user}
                 onLogin={handleLogin}
@@ -44,29 +93,28 @@ const MainLayout = () => {
                 orders={orders}
                 searchQuery={searchQuery}
                 onSearchChange={handleSearchChange}
-                // Add other props as needed:
-                // updateCartQuantity={updateCartQuantity}
-                // removeFromCart={removeFromCart}
-                // removeFromWishlist={removeFromWishlist}
-                // addToCart={addToCart}
+                updateCartQuantity={updateCartQuantity}
+                removeFromCart={removeFromCart}
+                removeFromWishlist={removeFromWishlist}
+                addToCart={addToCart}
             />
-            
-            <Routes>
-                <Route path="/" element={
-                    <AuthCheck>
-                        <Home/>
-                    </AuthCheck>
-                } />
-                <Route path="auth" element={<Auth/>}>
-                    <Route path="login" element={<Login/>} />
-                    <Route path="register" element={<Register/>} />
-                </Route>
 
-                {/* not found routes  */}
-                <Route path="*" element={<Error/> } />
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <AuthCheck>
+                            <Home />
+                        </AuthCheck>
+                    }
+                />
+                <Route path="/auth" element={<Auth />}>
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                </Route>
+                <Route path="*" element={<Error />} />
             </Routes>
 
-            {/* footer component  */}
             <Footer />
         </BrowserRouter>
     );
