@@ -16,6 +16,7 @@ const Navbar = () => {
     const [success, setSuccess] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [searchQuery, onSearchChange] = useState(false);
     
     // Form states
     const [formData, setFormData] = useState({
@@ -361,15 +362,20 @@ const Navbar = () => {
                         <div className="flex items-center gap-3 lg:gap-4">
                             {/* Search Box - Desktop */}
                             <div className="hidden lg:flex w-80 h-11 relative">
-                                <input 
-                                    type="text" 
-                                    placeholder="Search products..." 
-                                    className="w-full h-full bg-white/50 backdrop-blur-sm text-[#272343] rounded-xl pl-4 pr-12 border border-white/30 focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae]/50 transition-all duration-300 placeholder:text-[#636270]" 
-                                />
-                                <button className="absolute top-1/2 right-3 transform -translate-y-1/2 p-1 hover:bg-[#029fae]/10 rounded-lg transition-colors duration-300">
-                                    <Search size='18px' color="#029fae" />
-                                </button>
-                            </div>
+                            <input 
+                                type="text" 
+                                placeholder="Search products..." 
+                                value={searchQuery}
+                                onChange={(e) => onSearchChange(e.target.value)}
+                                className="w-full h-full bg-white/50 backdrop-blur-sm text-[#272343] rounded-xl pl-4 pr-12 border-2 border-[#029fae]/10 focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae]/50 transition-all duration-300 placeholder:text-[#636270] hover:border-[#029fae]/20" 
+                            />
+                            <button 
+                                className="absolute top-1/2 right-3 transform -translate-y-1/2 p-1 hover:bg-[#029fae]/10 rounded-lg transition-colors duration-300"
+                                onClick={() => onSearchChange(searchQuery)} // Optional: Add click handler if needed
+                            >
+                                <Search size='18px' color="#029fae" />
+                            </button>
+                        </div>
 
                             {/* Action Buttons */}
                             <div className="flex items-center gap-2">
