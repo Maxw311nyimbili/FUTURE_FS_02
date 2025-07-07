@@ -29,10 +29,11 @@ const MainLayout = () => {
 
                 {/* not found routes  */}
                 <Route path="*" element={<Error/> } />
-            </Routes>
+                </Routes>
 
             {/* footer component  */}
             <Footer />
+           
 
         </BrowserRouter>
 

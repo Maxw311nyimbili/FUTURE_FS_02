@@ -6,6 +6,7 @@ import Cards from "../../Components/Cards/Cards";
 import App1 from "../../Components/demo/demo";
 import App from './../../Components/App/App';
 import Features from './../../Components/Features/Features';
+import BerkshireHathaway from './../../Components/BerkshireHathaway/BerkshireHathaway';
 
 const Home = () => {
     return (
@@ -33,13 +34,13 @@ const Home = () => {
                 <App />
             </div>
 
-            {/* <div className="w-full">
-                <Cards />
-            </div> */}
-
             <div className="w-full">
                 <App1 />
             </div>
+
+            {/* <div className="w-full">
+                <BerkshireHathaway />
+            </div> */}
 
             <div className="w-full">
                 <ClientAndRecentProducts/>
