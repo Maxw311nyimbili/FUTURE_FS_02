@@ -16,7 +16,11 @@ const Navbar = () => {
     const [success, setSuccess] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [searchQuery, onSearchChange] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(""); 
+
+    const onSearchChange = (value) => {
+    setSearchQuery(value);
+    };
     
     // Form states
     const [formData, setFormData] = useState({
