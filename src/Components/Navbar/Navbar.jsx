@@ -2551,9 +2551,9 @@
 
 
 
-
 import { useState } from "react";
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle, Package } from "lucide-react";
+import { CartModal, AccountModal, WishlistModal, OrdersModal } from '../modals/modals.jsx';
 
 const AuthModal = ({ 
   isOpen, 
@@ -2740,16 +2740,23 @@ const Navbar = ({
   user, 
   onLogin, 
   onLogout, 
-  cartItemCount, 
-  onCartClick, 
-  onAccountClick, 
-  onWishlistClick, 
-  onOrdersClick,
+  cartItems = [],
+  wishlistItems = [],
+  orders = [],
+  updateCartQuantity,
+  removeFromCart,
+  removeFromWishlist,
+  addToCart,
   searchQuery,
   onSearchChange
 }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isOrdersOpen, setIsOrdersOpen] = useState(false);
+  
   const [authMode, setAuthMode] = useState('login');
   const [formData, setFormData] = useState({
     name: '',
@@ -2762,6 +2769,8 @@ const Navbar = ({
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -2843,6 +2852,13 @@ const Navbar = ({
     });
   };
 
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();
+    }
+    setIsAccountOpen(false);
+  };
+
   return (
     <>
       <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-30 shadow-sm border-b border-white/20">
@@ -2874,7 +2890,7 @@ const Navbar = ({
                 <>
                   {/* Wishlist */}
                   <button
-                    onClick={onWishlistClick}
+                    onClick={() => setIsWishlistOpen(true)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative"
                   >
                     <Heart size="20px" color="#636270" />
@@ -2882,7 +2898,7 @@ const Navbar = ({
 
                   {/* Cart */}
                   <button
-                    onClick={onCartClick}
+                    onClick={() => setIsCartOpen(true)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative"
                   >
                     <ShoppingCart size="20px" color="#636270" />
@@ -2905,14 +2921,14 @@ const Navbar = ({
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                       <div className="py-2">
                         <button
-                          onClick={onAccountClick}
+                          onClick={() => setIsAccountOpen(true)}
                           className="w-full px-4 py-2 text-left text-sm text-[#272343] hover:bg-gray-50 transition-colors flex items-center gap-2"
                         >
                           <User size="16px" color="#636270" />
                           My Account
                         </button>
                         <button
-                          onClick={onOrdersClick}
+                          onClick={() => setIsOrdersOpen(true)}
                           className="w-full px-4 py-2 text-left text-sm text-[#272343] hover:bg-gray-50 transition-colors flex items-center gap-2"
                         >
                           <Package size="16px" color="#636270" />
@@ -2920,7 +2936,7 @@ const Navbar = ({
                         </button>
                         <hr className="my-2" />
                         <button
-                          onClick={onLogout}
+                          onClick={handleLogout}
                           className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors"
                         >
                           Sign Out
@@ -2978,36 +2994,48 @@ const Navbar = ({
                     <span className="font-medium">{user.name}</span>
                   </div>
                   <button
-                    onClick={onWishlistClick}
+                    onClick={() => {
+                      setIsWishlistOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
                   >
                     <Heart size="20px" color="#636270" />
                     Wishlist
                   </button>
                   <button
-                    onClick={onCartClick}
+                    onClick={() => {
+                      setIsCartOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
                   >
                     <ShoppingCart size="20px" color="#636270" />
                     Cart ({cartItemCount})
                   </button>
                   <button
-                    onClick={onAccountClick}
+                    onClick={() => {
+                      setIsAccountOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
                   >
-                    <User size="20px" color="#636270" />
+                    <User size="16px" color="#636270" />
                     My Account
                   </button>
                   <button
-                    onClick={onOrdersClick}
+                    onClick={() => {
+                      setIsOrdersOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
                   >
-                    <Package size="20px" color="#636270" />
+                    <Package size="16px" color="#636270" />
                     My Orders
                   </button>
                   <hr className="my-2" />
                   <button
-                    onClick={onLogout}
+                    onClick={handleLogout}
                     className="w-full flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   >
                     Sign Out
@@ -3015,7 +3043,10 @@ const Navbar = ({
                 </>
               ) : (
                 <button
-                  onClick={() => setIsAuthModalOpen(true)}
+                  onClick={() => {
+                    setIsAuthModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className="w-full bg-[#029fae] text-white px-4 py-2 rounded-lg hover:bg-[#027a85] transition-colors font-medium"
                 >
                   Sign In
@@ -3025,6 +3056,7 @@ const Navbar = ({
           </div>
         )}
       </nav>
+      
 
       {/* Auth Modal */}
       <AuthModal
@@ -3043,6 +3075,44 @@ const Navbar = ({
         setShowPassword={setShowPassword}
         showConfirmPassword={showConfirmPassword}
         setShowConfirmPassword={setShowConfirmPassword}
+      />
+
+      {/* Cart Modal */}
+      <CartModal
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+        cartItems={cartItems}
+        updateCartQuantity={updateCartQuantity}
+        removeFromCart={removeFromCart}
+        user={user}
+      />
+
+      {/* Account Modal */}
+      <AccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        user={user}
+        onLogout={handleLogout}
+        onOrdersClick={() => {
+          setIsAccountOpen(false);
+          setIsOrdersOpen(true);
+        }}
+      />
+
+      {/* Wishlist Modal */}
+      <WishlistModal
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        wishlistItems={wishlistItems}
+        removeFromWishlist={removeFromWishlist}
+        addToCart={addToCart}
+      />
+
+      {/* Orders Modal */}
+      <OrdersModal
+        isOpen={isOrdersOpen}
+        onClose={() => setIsOrdersOpen(false)}
+        orders={orders}
       />
     </>
   );
