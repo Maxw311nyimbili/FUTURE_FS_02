@@ -2639,7 +2639,7 @@ const Navbar = ({
 
       {/* Cart Modal */}
       <CartModal
-        isCartOpen={isCartOpen}
+        isOpen={isCartOpen}
         setIsCartOpen={setIsCartOpen}
         cartItems={cartItems}
         updateCartQuantity={updateCartQuantity}
