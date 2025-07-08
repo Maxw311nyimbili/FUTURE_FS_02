@@ -2453,7 +2453,8 @@ const Navbar = ({
                     onClick={() => setIsWishlistOpen(true)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative"
                   >
-                    <Heart size="20px" color="#636270" />
+                    <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
+
                   </button>
 
                   {/* Cart */}
@@ -2560,7 +2561,8 @@ const Navbar = ({
                     }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
                   >
-                    <Heart size="20px" color="#636270" />
+                    <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
+
                     Wishlist
                   </button>
                   <button
