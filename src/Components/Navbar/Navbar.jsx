@@ -2638,14 +2638,14 @@ const Navbar = ({
       />
 
       {/* Cart Modal */}
-      <CartModal
-        isOpen={isCartOpen}
-        setIsCartOpen={setIsCartOpen}
-        cartItems={cartItems}
-        updateCartQuantity={updateCartQuantity}
-        removeFromCart={removeFromCart}
-        user={user}
-      />
+        <CartModal
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cartItems={cartItems}
+          updateCartQuantity={updateCartQuantity}
+          removeFromCart={removeFromCart}
+          user={user}
+        />
 
       {/* Account Modal */}
       <AccountModal
