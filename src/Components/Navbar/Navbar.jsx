@@ -2451,7 +2451,10 @@ const Navbar = ({
                   {/* Wishlist */}
                   <button
                     onClick={() => setIsWishlistOpen(true)}
-                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative"
+                    className={`p-2 rounded-lg transition-colors relative ${
+                      wishlistItems.length > 0 ? 'bg-[#ffe5e9]' : 'hover:bg-gray-100'
+                    }`}
+
                   >
                     <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
 
@@ -2559,7 +2562,10 @@ const Navbar = ({
                       setIsWishlistOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-[#272343] hover:bg-gray-50 rounded-lg transition-colors"
+                    className={`w-full flex items-center gap-2 px-3 py-2 text-[#272343] rounded-lg transition-colors ${
+                      wishlistItems.length > 0 ? 'bg-[#ffe5e9]' : 'hover:bg-gray-50'
+                    }`}
+
                   >
                     <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
 
