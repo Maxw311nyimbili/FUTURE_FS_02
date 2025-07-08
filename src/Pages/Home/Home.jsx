@@ -8,26 +8,20 @@ import App from './../../Components/App/App';
 import Features from './../../Components/Features/Features';
 import BerkshireHathaway from './../../Components/BerkshireHathaway/BerkshireHathaway';
 
-const Home = () => {
+const Home = ({
+    user,
+    addToCart,
+    addToWishlist,
+    cartItems,
+    wishlistItems,
+    updateCartQuantity,
+    removeFromCart,
+    removeFromWishlist,
+    searchQuery,
+    orders,
+}) => {
     return (
         <div>
-
-
-
-            {/* banner component  */}
-           {/* <div className="w-full min-h-[500px] md:min-h-[650px] lg:min-h-[850px] bg-[#f0f2f3] flex items-center justify-center rounded-b-3xl">
-                <Banner></Banner>
-            </div> */}
-            {/* delivery component */}
-            {/* <div className="delivery_component w-full min-h-[#150px]">
-                <Delivery></Delivery>
-            </div> */}
-
-
-            {/* brand component  */}
-            {/* <div className="brand flex items-center h-[171px] justify-center w-full mt-8 mb-8">
-                <Brand></Brand>
-            </div> */}
 
             {/* Combined Banner, Delivery & Brand Components */}
             <div className="w-full">
@@ -35,45 +29,23 @@ const Home = () => {
             </div>
 
             <div className="w-full">
-                <App1 />
+                <App1
+                    user={user}
+                    addToCart={addToCart}
+                    addToWishlist={addToWishlist}
+                    cartItems={cartItems}
+                    wishlistItems={wishlistItems}
+                    updateCartQuantity={updateCartQuantity}
+                    removeFromCart={removeFromCart}
+                    removeFromWishlist={removeFromWishlist}
+                    searchQuery={searchQuery}
+                    orders={orders}
+                />
             </div>
-
-            {/* <div className="w-full">
-                <BerkshireHathaway />
-            </div> */}
 
             <div className="w-full">
                 <ClientAndRecentProducts/>
             </div>
-
-            {/* features component */}
-            {/* <div className="w-full flex items-center justify-center mb-[80px]">
-                <Features></Features>
-            </div> */}
-
-            {/* features component */}
-            {/* <div className="w-full flex items-center justify-center mb-[80px]">
-                <Categories></Categories>
-            </div> */}
-
-            {/* product component  */}
-            {/* <div className="w-full flex items-center justify-center pb-[80px]">
-                <Product></Product>
-            </div> */}
-
-
-            {/* client say component  */}
-            {/* <div className="w-full flex items-center justify-center bg-[#f0f2f3] min-h-[589px] pb-[80px] pt-[80px]">
-
-                <Client></Client>
-
-            </div> */}
-
-
-            {/* Recent component  */}
-            {/* <div className="w-full flex items-center justify-center pb-[80px] pt-[80px]">
-                <Recent></Recent>
-            </div> */}
 
         </div>
     );

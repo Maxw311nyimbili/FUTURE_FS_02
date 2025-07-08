@@ -100,14 +100,26 @@ const MainLayout = () => {
             />
 
             <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <AuthCheck>
-                            <Home />
-                        </AuthCheck>
-                    }
+               <Route
+                path="/"
+                element={
+                    <AuthCheck>
+                    <Home
+                        user={user}
+                        addToCart={addToCart}
+                        addToWishlist={addToWishlist}
+                        cartItems={cartItems}
+                        wishlistItems={wishlistItems}
+                        updateCartQuantity={updateCartQuantity}
+                        removeFromCart={removeFromCart}
+                        removeFromWishlist={removeFromWishlist}
+                        searchQuery={searchQuery}
+                        orders={orders}
+                    />
+                    </AuthCheck>
+                }
                 />
+
                 <Route path="/auth" element={<Auth />}>
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />

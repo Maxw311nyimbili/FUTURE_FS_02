@@ -410,15 +410,19 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
 };
 
 // Main App Component
-const App1 = () => {
-    const [user, setUser] = useState(null);
-    const [cartItems, setCartItems] = useState([]);
-    const [wishlistItems, setWishlistItems] = useState([]);
-    const [orders, setOrders] = useState([
-        { id: '12345', date: '2024-01-15', items: 2, total: '299.99', status: 'Delivered' },
-        { id: '12346', date: '2024-01-20', items: 1, total: '149.99', status: 'Processing' },
-    ]);
-    const [searchQuery, setSearchQuery] = useState('');
+const App1 = ({
+      user,
+    addToCart,
+    addToWishlist,
+    cartItems,
+    wishlistItems,
+    updateCartQuantity,
+    removeFromCart,
+    removeFromWishlist,
+    searchQuery,
+    orders
+}) => {
+
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isAccountOpen, setIsAccountOpen] = useState(false);
     const [isWishlistOpen, setIsWishlistOpen] = useState(false);
@@ -453,10 +457,6 @@ const App1 = () => {
           )
         : [];
 
-    const handleLogin = (userData) => {
-        setUser(userData);
-    };
-
     const handleLogout = () => {
         setUser(null);
         setCartItems([]);
@@ -464,61 +464,7 @@ const App1 = () => {
         setIsAccountOpen(false);
     };
 
-    const addToCart = (product) => {
-        if (!user) {
-            alert('Please login to add items to cart');
-            return;
-        }
-
-        const existingItem = cartItems.find(item => item.id === product.id);
-        if (existingItem) {
-            setCartItems(cartItems.map(item =>
-                item.id === product.id 
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            ));
-        } else {
-            setCartItems([...cartItems, { 
-                ...product, 
-                quantity: 1,
-                name: product.title,
-                color: 'Default'
-            }]);
-        }
-    };
-
-    const addToWishlist = (product) => {
-        if (!user) {
-            alert('Please login to add items to wishlist');
-            return;
-        }
-
-        const existingItem = wishlistItems.find(item => item.id === product.id);
-        if (!existingItem) {
-            setWishlistItems([...wishlistItems, product]);
-        }
-    };
-
-    const updateCartQuantity = (id, quantity) => {
-        if (quantity <= 0) {
-            removeFromCart(id);
-            return;
-        }
-        setCartItems(cartItems.map(item =>
-            item.id === id ? { ...item, quantity } : item
-        ));
-    };
-
-    const removeFromCart = (id) => {
-        setCartItems(cartItems.filter(item => item.id !== id));
-    };
-
-    const removeFromWishlist = (id) => {
-        setWishlistItems(wishlistItems.filter(item => item.id !== id));
-    };
-
-    const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
+    
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
      
