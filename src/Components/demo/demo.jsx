@@ -74,7 +74,7 @@ const features = [
     status: 'New',
     price: 250,
     originalPrice: 300,
-    image: 'https://www.pexels.com/photo/chairs-and-table-in-building-12360519=crop',
+    image: 'images/products/industrial.webp',
   },
   {
     id: 2,
@@ -82,13 +82,13 @@ const features = [
     status: 'Sales',
     price: 200,
     originalPrice: 250,
-    image: 'https://www.pexels.com/photo/retro-design-armchair-14792096=crop',
+    image: 'https://www.pexels.com/photo/retro-design-armchair-14792096',
   },
   {
     id: 3,
     title: 'Bohemian Rattan Stool',
     price: 180,
-    image: 'https://www.pexels.com/photo/brown-wooden-framed-gray-padded-armchair-8987823=crop',
+    image: 'https://www.pexels.com/photo/brown-wooden-framed-gray-padded-armchair-8987823',
   },
   {
     id: 4,
@@ -96,7 +96,7 @@ const features = [
     status: 'New',
     price: 220,
     originalPrice: 270,
-    image: 'https://www.pexels.com/photo/bar-old-stools-2645=crop',
+    image: 'https://www.pexels.com/photo/bar-old-stools-2645',
   },
 ];
 
@@ -314,7 +314,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     id: 10,
     title: 'Wicker Patio Chair',
     price: 130,
-    image: 'https://www.pexels.com/photo/wicker-armchair-with-pillows-10032381=crop',
+    image: 'https://www.pexels.com/photo/wicker-armchair-with-pillows-10032381',
   },
   {
     id: 11,
@@ -341,7 +341,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     id: 14,
     title: 'Mid-Century Modern Chair',
     price: 175,
-    image: 'https://www.pexels.com/photo/a-white-pillow-on-a-chair-6312017fit=crop',
+    image: 'https://www.pexels.com/photo/a-white-pillow-on-a-chair-6312017',
   },
   {
     id: 15,
