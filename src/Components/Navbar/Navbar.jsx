@@ -82,7 +82,7 @@ const AuthModal = ({
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 text-[#029fae] focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300"
                 placeholder="Enter your email"
                 required
               />
@@ -98,7 +98,7 @@ const AuthModal = ({
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300 pr-12"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 text-[#029fae] focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300 pr-12"
                   placeholder="Enter your password"
                   required
                 />
@@ -127,7 +127,7 @@ const AuthModal = ({
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300 pr-12"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 text-[#029fae] focus:ring-[#029fae]/30 focus:border-[#029fae] transition-all duration-300 pr-12"
                     placeholder="Confirm your password"
                     required
                   />
