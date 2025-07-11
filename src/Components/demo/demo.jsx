@@ -67,38 +67,39 @@ const SimpleSlider = ({ children }) => {
 
 // Features Component
 const Features = ({ addToCart, addToWishlist, user, filteredProducts }) => {
-    const features = [
-        {
-            id: 1,
-            title: 'Library Stool',
-            status: 'New',
-            price: 250,
-            image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-            originalPrice: 300,
-        },
-        {
-            id: 2,
-            title: 'Library Stool Chair',
-            status: 'Sales',
-            price: 200,
-            image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop',
-            originalPrice: 250,
-        },
-        {
-            id: 3,
-            title: 'Library Stool Chair',
-            price: 250,
-            image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
-        },
-        {
-            id: 4,
-            title: 'Library Stool Chair',
-            status: 'New',
-            price: 200,
-            image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
-            originalPrice: 250,
-        },
-    ];
+ const features = [
+  {
+    id: 1,
+    title: 'Industrial Bar Stool',
+    status: 'New',
+    price: 250,
+    originalPrice: 300,
+    image: 'https://images.unsplash.com/photo-1621996346565-b42c142c15a0?w=400&h=300&fit=crop',
+  },
+  {
+    id: 2,
+    title: 'Vintage Leather Stool',
+    status: 'Sales',
+    price: 200,
+    originalPrice: 250,
+    image: 'https://images.unsplash.com/photo-1602526211039-90b59b812d8d?w=400&h=300&fit=crop',
+  },
+  {
+    id: 3,
+    title: 'Bohemian Rattan Stool',
+    price: 180,
+    image: 'https://images.unsplash.com/photo-1602524818531-f145cee0aa52?w=400&h=300&fit=crop',
+  },
+  {
+    id: 4,
+    title: 'Modern Chrome Stool',
+    status: 'New',
+    price: 220,
+    originalPrice: 270,
+    image: 'https://images.unsplash.com/photo-1602524818595-6e680c032d69?w=400&h=300&fit=crop',
+  },
+];
+
 
     const displayFeatures = filteredProducts.length > 0 ? filteredProducts.filter(p => features.some(f => f.id === p.id)) : features;
 
@@ -231,7 +232,7 @@ const TopCategories = ({ addToCart, addToWishlist, user, filteredProducts }) => 
         },
         {
             id: 7,
-            title: 'Desk Chair',
+            title: 'Comfort Lounge Chair',
             count: '154 Products',
             image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
             price: 220,
@@ -293,62 +294,64 @@ const TopCategories = ({ addToCart, addToWishlist, user, filteredProducts }) => 
 
 // Our Products Component
 const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
-    const products = [
-        {
-            id: 8,
-            title: 'Library Stool Chair',
-            status: 'New',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
-        },
-        {
-            id: 9,
-            title: 'Library Stool Chair',
-            status: 'Sales',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop',
-            originalPrice: 120,
-        },
-        {
-            id: 10,
-            title: 'Library Stool Chair',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
-        },
-        {
-            id: 11,
-            title: 'Library Stool Chair',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-        },
-        {
-            id: 12,
-            title: 'Library Stool Chair',
-            status: 'New',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
-        },
-        {
-            id: 13,
-            title: 'Library Stool Chair',
-            status: 'Sales',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop',
-            originalPrice: 120,
-        },
-        {
-            id: 14,
-            title: 'Library Stool Chair',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
-        },
-        {
-            id: 15,
-            title: 'Library Stool Chair',
-            price: 99,
-            image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-        },
-    ];
+  const products = [
+  {
+    id: 8,
+    title: 'Leather Recliner Chair',
+    status: 'New',
+    price: 250,
+    image: 'https://images.unsplash.com/photo-1616627981243-4133d497c073?w=400&h=300&fit=crop',
+  },
+  {
+    id: 9,
+    title: 'Classic Rocking Chair',
+    status: 'Sales',
+    price: 145,
+    originalPrice: 180,
+    image: 'https://images.unsplash.com/photo-1582582425284-612f96f67a5d?w=400&h=300&fit=crop',
+  },
+  {
+    id: 10,
+    title: 'Wicker Patio Chair',
+    price: 130,
+    image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9ab?w=400&h=300&fit=crop',
+  },
+  {
+    id: 11,
+    title: 'Velvet Accent Chair',
+    price: 210,
+    image: 'https://images.unsplash.com/photo-1615873968403-e3fdfd3de04f?w=400&h=300&fit=crop',
+  },
+  {
+    id: 12,
+    title: 'Rattan Armchair',
+    status: 'New',
+    price: 160,
+    image: 'https://images.unsplash.com/photo-1616627455600-3b1e7647a351?w=400&h=300&fit=crop',
+  },
+  {
+    id: 13,
+    title: 'Upholstered Club Chair',
+    status: 'Sales',
+    price: 190,
+    originalPrice: 230,
+    image: 'https://images.unsplash.com/photo-1585155774677-d9ef714b87e0?w=400&h=300&fit=crop',
+  },
+  {
+    id: 14,
+    title: 'Mid-Century Modern Chair',
+    price: 175,
+    image: 'https://images.unsplash.com/photo-1598300056474-93c208d5406c?w=400&h=300&fit=crop',
+  },
+  {
+    id: 15,
+    title: 'Minimalist Office Chair',
+    price: 140,
+    image: 'https://images.unsplash.com/photo-1616627455661-3702f4931e68?w=400&h=300&fit=crop',
+  },
+];
+
+
 
     const displayProducts = filteredProducts.length > 0 ? filteredProducts.filter(p => products.some(prod => prod.id === p.id)) : products;
 
