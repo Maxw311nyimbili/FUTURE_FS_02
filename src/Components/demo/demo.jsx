@@ -74,7 +74,7 @@ const features = [
     status: 'New',
     price: 250,
     originalPrice: 300,
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/chairs-and-table-in-building-12360519=crop',
   },
   {
     id: 2,
@@ -82,13 +82,13 @@ const features = [
     status: 'Sales',
     price: 200,
     originalPrice: 250,
-    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/retro-design-armchair-14792096=crop',
   },
   {
     id: 3,
     title: 'Bohemian Rattan Stool',
     price: 180,
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/brown-wooden-framed-gray-padded-armchair-8987823=crop',
   },
   {
     id: 4,
@@ -96,7 +96,7 @@ const features = [
     status: 'New',
     price: 220,
     originalPrice: 270,
-    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/bar-old-stools-2645=crop',
   },
 ];
 
@@ -300,7 +300,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     title: 'Leather Recliner Chair',
     status: 'New',
     price: 250,
-    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
+    image: 'images/products/recliner.webp',
   },
   {
     id: 9,
@@ -308,13 +308,13 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     status: 'Sales',
     price: 145,
     originalPrice: 180,
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
   },
   {
     id: 10,
     title: 'Wicker Patio Chair',
     price: 130,
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/wicker-armchair-with-pillows-10032381=crop',
   },
   {
     id: 11,
@@ -327,7 +327,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     title: 'Rattan Armchair',
     status: 'New',
     price: 160,
-    image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/a-pair-of-slippers-near-a-brown-woven-wooden-chair-5794015=crop',
   },
   {
     id: 13,
@@ -341,7 +341,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     id: 14,
     title: 'Mid-Century Modern Chair',
     price: 175,
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
+    image: 'https://www.pexels.com/photo/a-white-pillow-on-a-chair-6312017fit=crop',
   },
   {
     id: 15,
