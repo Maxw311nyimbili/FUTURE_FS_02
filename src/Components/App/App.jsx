@@ -314,7 +314,7 @@ const Brand = () => {
         },
         {
             id: 2,
-            image: "images/brands/brand_2.png"
+            image: "images/brands/brand 2.jpg"
         },
         {
             id: 3,
