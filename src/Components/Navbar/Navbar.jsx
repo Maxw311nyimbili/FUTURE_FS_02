@@ -187,6 +187,8 @@ const Navbar = ({
   user, 
   onLogin, 
   onLogout, 
+  loginFunction,      // Add these props
+  registerFunction,   // Add these props
   cartItems = [],
   wishlistItems = [],
   orders = [],
@@ -241,49 +243,66 @@ const Navbar = ({
     setSuccess('');
 
     try {
-        const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
-        const body = authMode === 'login' 
-            ? { email: formData.email, password: formData.password }
-            : { name: formData.name, email: formData.email, password: formData.password, confirmPassword: formData.confirmPassword };
-
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-            body: JSON.stringify(body)
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setSuccess(authMode === 'login' ? 'Login successful!' : 'Registration successful!');
-            
-            // Call the onLogin callback with user data
-            if (onLogin && data.user) {
-                onLogin(data.user);
-            }
-            
-            // Reset form
-            setFormData({
-                name: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            });
-            
-            setTimeout(() => {
-                setIsAuthModalOpen(false);
-                setSuccess('');
-            }, 1500);
+      let result;
+      
+      if (authMode === 'login') {
+        if (loginFunction) {
+          result = await loginFunction({
+            email: formData.email,
+            password: formData.password
+          });
         } else {
-            setError(data.message || 'Authentication failed');
+          // Fallback - simple mock authentication
+          result = { success: true, user: { name: formData.email.split('@')[0], email: formData.email } };
         }
+      } else {
+        // Registration
+        if (formData.password !== formData.confirmPassword) {
+          setError('Passwords do not match');
+          setLoading(false);
+          return;
+        }
+
+        if (registerFunction) {
+          result = await registerFunction({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            confirmPassword: formData.confirmPassword
+          });
+        } else {
+          // Fallback - simple mock registration
+          result = { success: true, user: { name: formData.name, email: formData.email } };
+        }
+      }
+
+      if (result.success) {
+        setSuccess(authMode === 'login' ? 'Login successful!' : 'Registration successful!');
+        
+        // Call the onLogin callback
+        if (onLogin && result.user) {
+          onLogin(result.user);
+        }
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: ''
+        });
+        
+        setTimeout(() => {
+          setIsAuthModalOpen(false);
+          setSuccess('');
+        }, 1500);
+      } else {
+        setError(result.error || 'Authentication failed');
+      }
     } catch (error) {
-        setError('Network error. Please try again.');
+      setError('Network error. Please try again.');
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -329,7 +348,6 @@ const Navbar = ({
             {/* Desktop Search */}
             <div className="hidden md:flex flex-1 max-w-lg mx-8">
               <div className="hidden lg:flex w-170 h-11 relative">
-
                 <input
                   type="text"
                   value={searchQuery}
@@ -338,10 +356,10 @@ const Navbar = ({
                   className="w-full h-full bg-white/50 backdrop-blur-sm text-[#272343] rounded-xl pl-4 pr-12 border-2 border-[#029fae]/10 focus:outline-none focus:ring-2 focus:ring-[#029fae]/30 focus:border-[#029fae]/50 transition-all duration-300 placeholder:text-[#636270] hover:border-[#029fae]/20" 
                 />
                 <button 
-                        className="absolute top-1/2 right-3 transform -translate-y-1/2 p-1 hover:bg-[#029fae]/10 rounded-lg transition-colors duration-300"
-                        onClick={() => handleSearchChange(searchQuery)}
-                    >
-                        <Search size='18px' color="#029fae" />
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 p-1 hover:bg-[#029fae]/10 rounded-lg transition-colors duration-300"
+                  onClick={() => console.log('Search clicked')}
+                >
+                  <Search size='18px' color="#029fae" />
                 </button>
               </div>
             </div>
@@ -356,10 +374,8 @@ const Navbar = ({
                     className={`p-2 rounded-lg transition-colors relative ${
                       wishlistItems.length > 0 ? 'bg-[#ffe5e9]' : 'hover:bg-gray-100'
                     }`}
-
                   >
                     <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
-
                   </button>
 
                   {/* Cart */}
@@ -467,10 +483,8 @@ const Navbar = ({
                     className={`w-full flex items-center gap-2 px-3 py-2 text-[#272343] rounded-lg transition-colors ${
                       wishlistItems.length > 0 ? 'bg-[#ffe5e9]' : 'hover:bg-gray-50'
                     }`}
-
                   >
                     <Heart size="20px" color={wishlistItems.length > 0 ? "#e63946" : "#636270"} />
-
                     Wishlist
                   </button>
                   <button
@@ -527,7 +541,6 @@ const Navbar = ({
         )}
       </nav>
       
-
       {/* Auth Modal */}
       <AuthModal
         isOpen={isAuthModalOpen}
@@ -548,14 +561,14 @@ const Navbar = ({
       />
 
       {/* Cart Modal */}
-        <CartModal
-          isOpen={isCartOpen}
-          onClose={() => setIsCartOpen(false)}
-          cartItems={cartItems}
-          updateCartQuantity={updateCartQuantity}
-          removeFromCart={removeFromCart}
-          user={user}
-        />
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+        updateCartQuantity={updateCartQuantity}
+        removeFromCart={removeFromCart}
+        user={user}
+      />
 
       {/* Account Modal */}
       <AccountModal

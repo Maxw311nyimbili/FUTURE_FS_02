@@ -12,19 +12,43 @@ import Login from '../Pages/Auth/Login/Login';
 import Register from '../Pages/Auth/Register/Register';
 import Error from '../Pages/Error/Error';
 
-// Auth check
-import AuthCheck from '../AuthCheck/AuthCheck';
+// Auth hook
+import { useAuth } from '../hooks/useAuth';
 
 const MainLayout = () => {
-    const [user, setUser] = useState(null);
+    const { user, loading, login, register, logout } = useAuth();
     const [cartItems, setCartItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
     const [orders, setOrders] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
+    // Show loading screen while checking authentication
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <div className="w-8 h-8 border-4 border-[#029fae] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-[#636270]">Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
     // Auth handlers
-    const handleLogin = (userData) => setUser(userData);
-    const handleLogout = () => setUser(null);
+    const handleLogin = async (userData) => {
+        // This is called from the Navbar component after successful login
+        console.log('User logged in:', userData);
+        // Any additional logic after login can go here
+    };
+
+    const handleLogout = async () => {
+        await logout();
+        // Clear user-specific data
+        setCartItems([]);
+        setWishlistItems([]);
+        setOrders([]);
+    };
+
     const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
     // Cart handlers
@@ -97,32 +121,41 @@ const MainLayout = () => {
                 removeFromCart={removeFromCart}
                 removeFromWishlist={removeFromWishlist}
                 addToCart={addToCart}
+                // Pass login and register functions to Navbar
+                loginFunction={login}
+                registerFunction={register}
             />
 
             <Routes>
-               <Route
-                path="/"
-                element={
-                    <AuthCheck>
-                    <Home
-                        user={user}
-                        addToCart={addToCart}
-                        addToWishlist={addToWishlist}
-                        cartItems={cartItems}
-                        wishlistItems={wishlistItems}
-                        updateCartQuantity={updateCartQuantity}
-                        removeFromCart={removeFromCart}
-                        removeFromWishlist={removeFromWishlist}
-                        searchQuery={searchQuery}
-                        orders={orders}
-                    />
-                    </AuthCheck>
-                }
+                <Route
+                    path="/"
+                    element={
+                        <AuthCheck user={user} requireAuth={false}>
+                            <Home
+                                user={user}
+                                addToCart={addToCart}
+                                addToWishlist={addToWishlist}
+                                cartItems={cartItems}
+                                wishlistItems={wishlistItems}
+                                updateCartQuantity={updateCartQuantity}
+                                removeFromCart={removeFromCart}
+                                removeFromWishlist={removeFromWishlist}
+                                searchQuery={searchQuery}
+                                orders={orders}
+                            />
+                        </AuthCheck>
+                    }
                 />
 
                 <Route path="/auth" element={<Auth />}>
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
+                    <Route 
+                        path="login" 
+                        element={<Login loginFunction={login} />} 
+                    />
+                    <Route 
+                        path="register" 
+                        element={<Register registerFunction={register} />} 
+                    />
                 </Route>
                 <Route path="*" element={<Error />} />
             </Routes>
