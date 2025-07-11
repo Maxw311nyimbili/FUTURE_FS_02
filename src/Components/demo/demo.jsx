@@ -314,7 +314,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     id: 10,
     title: 'Wicker Patio Chair',
     price: 130,
-    image: 'https://www.pexels.com/photo/wicker-armchair-with-pillows-10032381',
+    image: 'images/products/wicker.jpg',
   },
   {
     id: 11,
@@ -327,7 +327,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     title: 'Rattan Armchair',
     status: 'New',
     price: 160,
-    image: 'https://www.pexels.com/photo/a-pair-of-slippers-near-a-brown-woven-wooden-chair-5794015=crop',
+    image: 'images/products/ratten.jpg',
   },
   {
     id: 13,
@@ -341,7 +341,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
     id: 14,
     title: 'Mid-Century Modern Chair',
     price: 175,
-    image: 'https://www.pexels.com/photo/a-white-pillow-on-a-chair-6312017',
+    image: 'images/products/Mid-Century.jpg',
   },
   {
     id: 15,
