@@ -18,7 +18,7 @@ const Footer = () => {
                             </div>
 
                             <p className="text-sm md:text-base text-[#ffffff] font-inter font-normal mb-4 lg:mb-4 max-w-[350px]">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus repellat vero nulla! Quibusdam, reiciendis maiores fugiat atque aliquam molestiae vero?
+                                Crafting exceptional furniture since 1985. We believe every piece should tell a story of quality, comfort, and timeless design. From handpicked materials to meticulous craftsmanship, Velour transforms houses into homes.
                             </p>
 
                             <div className="footer_social flex items-center gap-2 md:gap-3">
@@ -96,7 +96,7 @@ const Footer = () => {
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="text-center sm:text-left">
                             <p className="text-xs md:text-base text-[#9a9caa] font-normal font-inter">
-                                @ 2025 Blogy- Designed & Develop <span className="text-[#272343]">Lifeonthecode</span>
+                                @  2025 Velour. All rights reserved. <span className="text-[#272343]"> Legendary Empire</span>
                             </p> 
                         </div>
                         <div className="flex items-center gap-2 md:gap-3.5 text-center">
