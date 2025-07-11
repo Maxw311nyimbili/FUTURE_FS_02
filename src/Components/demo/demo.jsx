@@ -96,7 +96,7 @@ const features = [
     status: 'New',
     price: 220,
     originalPrice: 270,
-    image: 'https://www.pexels.com/photo/bar-old-stools-2645',
+    image: 'images/products/chrome.jpg',
   },
 ];
 
