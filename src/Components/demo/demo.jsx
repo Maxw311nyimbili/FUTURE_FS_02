@@ -82,13 +82,13 @@ const features = [
     status: 'Sales',
     price: 200,
     originalPrice: 250,
-    image: 'https://www.pexels.com/photo/retro-design-armchair-14792096',
+    image: 'images/products/leather.jpg',
   },
   {
     id: 3,
     title: 'Bohemian Rattan Stool',
     price: 180,
-    image: 'https://www.pexels.com/photo/brown-wooden-framed-gray-padded-armchair-8987823',
+    image: 'images/products/Bohemian.jpg',
   },
   {
     id: 4,
