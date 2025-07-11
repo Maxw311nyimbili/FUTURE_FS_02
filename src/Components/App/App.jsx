@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { MoveRight, ChevronLeft, ChevronRight, Play, Pause, Clock3, Percent, ShieldCheck, Truck } from "lucide-react";
-
+import VelourModal from '../velourModal/velourModal.jsx'
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
+        const [isModalOpen, setIsModalOpen] = useState(false);
     const intervalRef = useRef(null);
     const bannerRef = useRef(null);
 
@@ -171,9 +172,16 @@ const Banner = () => {
                                     <MoveRight size="18px" className="group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0" />
                                 </button>
                                 
-                                <button className="group w-full sm:w-auto sm:min-w-[140px] md:min-w-[160px] flex items-center justify-center gap-2 h-[48px] md:h-[52px] lg:h-[56px] bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-xl text-[#272343] border border-gray-200 hover:border-[#029fae] hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-200 px-4 md:px-6">
+                                <button 
+                                  onClick={() => setIsModalOpen(true)}
+                                   className="group w-full sm:w-auto sm:min-w-[140px] md:min-w-[160px] flex items-center justify-center gap-2 h-[48px] md:h-[52px] lg:h-[56px] bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 rounded-xl text-[#272343] border border-gray-200 hover:border-[#029fae] hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-200 px-4 md:px-6">
                                     <span className="truncate text-sm md:text-base">Learn More</span>
                                 </button>
+
+                                <VelourModal 
+                                    isOpen={isModalOpen} 
+                                    onClose={() => setIsModalOpen(false)} 
+                                />
                             </div>
                         </div>
 
