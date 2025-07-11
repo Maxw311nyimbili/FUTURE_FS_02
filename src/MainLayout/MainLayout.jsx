@@ -11,6 +11,7 @@ import Auth from '../Pages/Auth/Auth';
 import Login from '../Pages/Auth/Login/Login';
 import Register from '../Pages/Auth/Register/Register';
 import Error from '../Pages/Error/Error';
+import AuthCheck from '../AuthCheck/AuthCheck';
 
 // Auth hook
 import { useAuth } from '../hooks/useAuth';
