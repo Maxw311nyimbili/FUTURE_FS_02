@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ShoppingCart, User, Quote, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 
-const ClientAndRecentProducts = () => {
+const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
     // Client Reviews Component
     const ClientReviews = () => {
         // Custom arrow components for client reviews
@@ -146,7 +146,7 @@ const ClientAndRecentProducts = () => {
     };
 
     // Recent Products Component
-    const RecentProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
+    const RecentProducts = () => {
         // Custom arrow components for recent products
          const CustomPrevArrow = ({ onClick }) => (
             <button
@@ -229,7 +229,8 @@ const ClientAndRecentProducts = () => {
                 },
             ];
 
-            const displayFeatures = filteredProducts.length > 0 ? filteredProducts.filter(p => features.some(f => f.id === p.id)) : features;
+        // Use the features array directly without filtering
+        const displayFeatures = features;
 
         const productSettings = {
             dots: false,
@@ -266,95 +267,104 @@ const ClientAndRecentProducts = () => {
             ]
         };
 
-            return (
-                <div className="mt-8 md:mt-12 lg:mt-16">
-                    <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-                        <SectionTitle title="Recently Added" mb='mb-6 md:mb-8 lg:mb-10' />
-                        
-                        <div className="slider-container features_slider w-full relative">
-                            <style jsx>{`
-                                .slick-dots {
-                                    bottom: -35px !important;
-                                }
-                                .slick-dots li button:before {
-                                    color: #007580 !important;
-                                    font-size: 10px !important;
-                                }
-                                .slick-dots li.slick-active button:before {
-                                    color: #007580 !important;
-                                }
-                                .slick-track {
-                                    display: flex !important;
-                                    align-items: stretch !important;
-                                }
-                                .slick-slide > div {
-                                    height: 100% !important;
-                                }
-                            `}</style>
-                            <Slider {...productSettings}>
-                                {
-                                    displayFeatures?.map((feature, index) => (
-                                        <div key={feature.id} className="px-2 sm:px-3 h-full">
-                                            <div className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col">
-                                                <div className="feature_image relative flex-shrink-0 overflow-hidden">
-                                                    <img 
-                                                        className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-300" 
-                                                        src={feature?.image} 
-                                                        alt={feature?.title}
-                                                        loading="lazy"
-                                                    />
-                                                    {
-                                                        feature?.status && (
-                                                            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-[#007580] text-white px-2 py-1 rounded-md shadow-md">
-                                                                <span className="text-xs sm:text-sm font-inter font-medium">
-                                                                    {feature?.status}
-                                                                </span>
-                                                            </div>
-                                                        )
-                                                    }
+        // Default handlers if not provided
+        const handleAddToCart = addToCart || ((product) => {
+            console.log('Add to cart:', product);
+        });
+
+        const handleAddToWishlist = addToWishlist || ((product) => {
+            console.log('Add to wishlist:', product);
+        });
+
+        return (
+            <div className="mt-8 md:mt-12 lg:mt-16">
+                <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+                    <SectionTitle title="Recently Added" mb='mb-6 md:mb-8 lg:mb-10' />
+                    
+                    <div className="slider-container features_slider w-full relative">
+                        <style jsx>{`
+                            .slick-dots {
+                                bottom: -35px !important;
+                            }
+                            .slick-dots li button:before {
+                                color: #007580 !important;
+                                font-size: 10px !important;
+                            }
+                            .slick-dots li.slick-active button:before {
+                                color: #007580 !important;
+                            }
+                            .slick-track {
+                                display: flex !important;
+                                align-items: stretch !important;
+                            }
+                            .slick-slide > div {
+                                height: 100% !important;
+                            }
+                        `}</style>
+                        <Slider {...productSettings}>
+                            {
+                                displayFeatures?.map((feature, index) => (
+                                    <div key={feature.id} className="px-2 sm:px-3 h-full">
+                                        <div className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col">
+                                            <div className="feature_image relative flex-shrink-0 overflow-hidden">
+                                                <img 
+                                                    className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-300" 
+                                                    src={feature?.image} 
+                                                    alt={feature?.title}
+                                                    loading="lazy"
+                                                />
+                                                {
+                                                    feature?.status && (
+                                                        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-[#007580] text-white px-2 py-1 rounded-md shadow-md">
+                                                            <span className="text-xs sm:text-sm font-inter font-medium">
+                                                                {feature?.status}
+                                                            </span>
+                                                        </div>
+                                                    )
+                                                }
+                                                <button 
+                                                    onClick={() => handleAddToWishlist(feature)}
+                                                    className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200 hover:scale-110"
+                                                >
+                                                    <Heart size={14} className="sm:w-4 sm:h-4 text-[#007580]" />
+                                                </button>
+                                            </div>
+                                            
+                                            <div className="feature_content p-3 sm:p-4 flex-grow flex flex-col">
+                                                <div className="flex items-start justify-between mb-2 flex-grow">
+                                                    <h4 className="text-sm sm:text-base md:text-lg text-[#007580] capitalize font-inter font-medium leading-tight pr-2 flex-grow">
+                                                        {feature?.title}
+                                                    </h4>
                                                     <button 
-                                                        onClick={() => addToWishlist(feature)}
-                                                        className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200 hover:scale-110"
+                                                        onClick={() => handleAddToCart(feature)}
+                                                        className="bg-[#007580] hover:bg-[#005f67] h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50 flex-shrink-0"
                                                     >
-                                                        <Heart size={14} className="sm:w-4 sm:h-4 text-[#007580]" />
+                                                        <ShoppingCart size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
                                                     </button>
                                                 </div>
                                                 
-                                                <div className="feature_content p-3 sm:p-4 flex-grow flex flex-col">
-                                                    <div className="flex items-start justify-between mb-2 flex-grow">
-                                                        <h4 className="text-sm sm:text-base md:text-lg text-[#007580] capitalize font-inter font-medium leading-tight pr-2 flex-grow">
-                                                            {feature?.title}
-                                                        </h4>
-                                                        <button 
-                                                            onClick={() => addToCart(feature)}
-                                                            className="bg-[#007580] hover:bg-[#005f67] h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50 flex-shrink-0"
-                                                        >
-                                                            <ShoppingCart size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
-                                                        </button>
-                                                    </div>
-                                                    
-                                                    <div className="flex items-center gap-2 mt-auto">
-                                                        <span className="text-base sm:text-lg md:text-xl text-[#272343] font-semibold font-inter">
-                                                            ${feature?.price}
-                                                        </span>
-                                                        {
-                                                            feature?.originalPrice && (
-                                                                <span className="text-xs sm:text-sm text-[#9a9caa] font-inter font-normal line-through">
-                                                                    ${feature?.originalPrice}
-                                                                </span>
-                                                            )
-                                                        }
-                                                    </div>
+                                                <div className="flex items-center gap-2 mt-auto">
+                                                    <span className="text-base sm:text-lg md:text-xl text-[#272343] font-semibold font-inter">
+                                                        ${feature?.price}
+                                                    </span>
+                                                    {
+                                                        feature?.originalPrice && (
+                                                            <span className="text-xs sm:text-sm text-[#9a9caa] font-inter font-normal line-through">
+                                                                ${feature?.originalPrice}
+                                                            </span>
+                                                        )
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
-                                    ))
-                                }
-                            </Slider>
-                        </div>
+                                    </div>
+                                ))
+                            }
+                        </Slider>
                     </div>
                 </div>
-            );
+            </div>
+        );
     };
 
     return (

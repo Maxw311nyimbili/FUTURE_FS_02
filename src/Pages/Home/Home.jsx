@@ -39,7 +39,11 @@ const Home = ({
             </div>
 
             <div className="w-full">
-                <ClientAndRecentProducts/>
+                <ClientAndRecentProducts
+                    addToCart={addToCart}
+                    addToWishlist={addToWishlist}
+                    user={user}
+                />
             </div>
 
         </div>
