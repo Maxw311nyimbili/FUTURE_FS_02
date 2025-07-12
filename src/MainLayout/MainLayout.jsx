@@ -55,7 +55,9 @@ const MainLayout = () => {
     // Cart handlers
     const addToCart = (product) => {
         if (!user) {
+            setLoginModalAction('cart');
             setLoginModalOpen(true);
+    
             return;
         }
 
@@ -165,7 +167,12 @@ const MainLayout = () => {
                 isOpen={loginModalOpen}
                 onClose={() => setLoginModalOpen(false)}
                 action={loginModalAction}
+                onLoginClick={() => {
+                    setLoginModalOpen(false);
+                    window.location.href = '/auth/login'; 
+                }}
             />
+
 
             <Footer />
         </BrowserRouter>

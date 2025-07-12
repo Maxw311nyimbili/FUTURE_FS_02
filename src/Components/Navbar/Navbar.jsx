@@ -3,6 +3,7 @@ import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus
 import { CartModal, AccountModal, WishlistModal, OrdersModal } from '../modals/modals.jsx';
 import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal.jsx';
 
+
 const AuthModal = ({ 
   isOpen, 
   onClose, 
