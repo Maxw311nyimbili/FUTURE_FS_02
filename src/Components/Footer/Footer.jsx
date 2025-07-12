@@ -49,7 +49,7 @@ const Footer = () => {
                                     { icon: Twitter, label: "Twitter" },
                                     { icon: Instagram, label: "Instagram" },
                                     { icon: Youtube, label: "YouTube" }
-                                ].map(({ icon: label }) => (
+                                ].map(({ icon: Icon, label }) => (
                                     <Link 
                                         key={label}
                                         className="group p-3 rounded-full bg-[#1e3445] hover:bg-[#029fae] transition-all duration-300 transform hover:scale-110"
