@@ -119,8 +119,8 @@ const Recent = ({ addToCart, addToWishlist, user, filteredProducts }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    arrows: false, // Hide arrows on mobile
-                    dots: true, // Show dots on mobile
+                    arrows: false, 
+                    dots: true, 
                 }
             }
         ]

@@ -150,19 +150,19 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
         // Custom arrow components for recent products
          const CustomPrevArrow = ({ onClick }) => (
             <button
-                className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 border border-gray-200"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 shadow-lg rounded-full p-2 sm:p-3 transition-all duration-200 border border-gray-200"
                 onClick={onClick}
             >
-                <ChevronLeft size={16} className="sm:w-5 sm:h-5 text-[#007580]" />
+                <ChevronLeft size={18} className="sm:w-5 sm:h-5 text-[#007580]" />
             </button>
         );
 
         const CustomNextArrow = ({ onClick }) => (
             <button
-                className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white shadow-lg rounded-full p-2 transition-all duration-200 border border-gray-200"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 shadow-lg rounded-full p-2 sm:p-3 transition-all duration-200 border border-gray-200"
                 onClick={onClick}
             >
-                <ChevronRight size={16} className="sm:w-5 sm:h-5 text-[#007580]" />
+                <ChevronRight size={18} className="sm:w-5 sm:h-5 text-[#007580]" />
             </button>
         );
 
@@ -173,7 +173,7 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'New',
                     price: 250,
                     originalPrice: 300,
-                    image: '/src/assets/features/product_1.png',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
                 },
                 {
                     id: 17,
@@ -181,13 +181,13 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'Sales',
                     price: 180,
                     originalPrice: 220,
-                    image: '/src/assets/features/product_2.png',
+                    image: 'https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=400&h=300&fit=crop',
                 },
                 {
                     id: 18,
                     title: 'Modern Dining Chair',
                     price: 150,
-                    image: '/src/assets/features/product_3.png',
+                    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
                 },
                 {
                     id: 19,
@@ -195,7 +195,7 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'New',
                     price: 320,
                     originalPrice: 380,
-                    image: '/src/assets/features/product_4.png',
+                    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
                 },
                 {
                     id: 20,
@@ -203,7 +203,7 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'New',
                     price: 450,
                     originalPrice: 520,
-                    image: '/src/assets/features/product_1.png',
+                    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
                 },
                 {
                     id: 21,
@@ -211,13 +211,13 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'Sales',
                     price: 200,
                     originalPrice: 250,
-                    image: '/src/assets/features/product_2.png',
+                    image: 'https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=400&h=300&fit=crop',
                 },
                 {
                     id: 22,
                     title: 'Minimalist Side Chair',
                     price: 120,
-                    image: '/src/assets/features/product_3.png',
+                    image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop',
                 },
                 {
                     id: 23,
@@ -225,7 +225,7 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                     status: 'New',
                     price: 580,
                     originalPrice: 650,
-                    image: '/src/assets/features/product_4.png',
+                    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop',
                 },
             ];
 
@@ -277,18 +277,18 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
         });
 
         return (
-            <div className="mt-8 md:mt-12 lg:mt-16">
-                <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-                    <SectionTitle title="Recently Added" mb='mb-6 md:mb-8 lg:mb-10' />
+            <div className="bg-gray-50 py-12 md:py-16 lg:py-20 mb-16 md:mb-20 lg:mb-24">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <SectionTitle title="Recently Added" mb='mb-8 md:mb-12 lg:mb-16' />
                     
                     <div className="slider-container features_slider w-full relative">
                         <style jsx>{`
                             .slick-dots {
-                                bottom: -35px !important;
+                                bottom: -50px !important;
                             }
                             .slick-dots li button:before {
                                 color: #007580 !important;
-                                font-size: 10px !important;
+                                font-size: 12px !important;
                             }
                             .slick-dots li.slick-active button:before {
                                 color: #007580 !important;
@@ -304,56 +304,62 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                         <Slider {...productSettings}>
                             {
                                 displayFeatures?.map((feature, index) => (
-                                    <div key={feature.id} className="px-2 sm:px-3 h-full">
-                                        <div className="group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col">
+                                    <div key={feature.id} className="px-3 md:px-4 h-full">
+                                        <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col border border-gray-100">
                                             <div className="feature_image relative flex-shrink-0 overflow-hidden">
                                                 <img 
-                                                    className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover group-hover:scale-110 transition-transform duration-300" 
+                                                    className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-110 transition-transform duration-500" 
                                                     src={feature?.image} 
                                                     alt={feature?.title}
                                                     loading="lazy"
+                                                    onError={(e) => {
+                                                        e.target.src = 'https://via.placeholder.com/400x300/f0f0f0/888888?text=Chair';
+                                                    }}
                                                 />
                                                 {
                                                     feature?.status && (
-                                                        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-[#007580] text-white px-2 py-1 rounded-md shadow-md">
-                                                            <span className="text-xs sm:text-sm font-inter font-medium">
-                                                                {feature?.status}
-                                                            </span>
+                                                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-xs font-semibold shadow-lg ${
+                                                            feature?.status === 'New' 
+                                                                ? 'bg-gradient-to-r from-green-500 to-green-600' 
+                                                                : 'bg-gradient-to-r from-red-500 to-red-600'
+                                                        }`}>
+                                                            {feature?.status}
                                                         </div>
                                                     )
                                                 }
                                                 <button 
                                                     onClick={() => handleAddToWishlist(feature)}
-                                                    className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200 hover:scale-110"
+                                                    className="absolute top-3 right-3 bg-white/95 hover:bg-white p-2.5 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group/wishlist"
                                                 >
-                                                    <Heart size={14} className="sm:w-4 sm:h-4 text-[#007580]" />
+                                                    <Heart size={16} className="text-gray-600 group-hover/wishlist:text-red-500 transition-colors duration-200" />
                                                 </button>
                                             </div>
                                             
-                                            <div className="feature_content p-3 sm:p-4 flex-grow flex flex-col">
-                                                <div className="flex items-start justify-between mb-2 flex-grow">
-                                                    <h4 className="text-sm sm:text-base md:text-lg text-[#007580] capitalize font-inter font-medium leading-tight pr-2 flex-grow">
-                                                        {feature?.title}
-                                                    </h4>
+                                            <div className="feature_content p-5 sm:p-6 flex-grow flex flex-col">
+                                                <div className="flex items-start justify-between mb-4 flex-grow">
+                                                    <div className="flex-grow pr-3">
+                                                        <h4 className="text-lg sm:text-xl text-[#272343] capitalize font-inter font-semibold leading-tight mb-2">
+                                                            {feature?.title}
+                                                        </h4>
+                                                        <div className="flex items-center gap-3">
+                                                            <span className="text-xl sm:text-2xl text-[#007580] font-bold font-inter">
+                                                                ${feature?.price}
+                                                            </span>
+                                                            {
+                                                                feature?.originalPrice && (
+                                                                    <span className="text-sm sm:text-base text-gray-400 font-inter line-through">
+                                                                        ${feature?.originalPrice}
+                                                                    </span>
+                                                                )
+                                                            }
+                                                        </div>
+                                                    </div>
                                                     <button 
                                                         onClick={() => handleAddToCart(feature)}
-                                                        className="bg-[#007580] hover:bg-[#005f67] h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50 flex-shrink-0"
+                                                        className="bg-gradient-to-r from-[#007580] to-[#005f67] hover:from-[#005f67] hover:to-[#004d54] h-11 w-11 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50 shadow-lg group/cart"
                                                     >
-                                                        <ShoppingCart size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                                                        <ShoppingCart size={18} className="sm:w-5 sm:h-5 text-white group-hover/cart:scale-110 transition-transform duration-200" />
                                                     </button>
-                                                </div>
-                                                
-                                                <div className="flex items-center gap-2 mt-auto">
-                                                    <span className="text-base sm:text-lg md:text-xl text-[#272343] font-semibold font-inter">
-                                                        ${feature?.price}
-                                                    </span>
-                                                    {
-                                                        feature?.originalPrice && (
-                                                            <span className="text-xs sm:text-sm text-[#9a9caa] font-inter font-normal line-through">
-                                                                ${feature?.originalPrice}
-                                                            </span>
-                                                        )
-                                                    }
                                                 </div>
                                             </div>
                                         </div>
