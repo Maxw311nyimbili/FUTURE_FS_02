@@ -133,13 +133,7 @@ const features = [
                                 <div className="flex items-center justify-between mb-3">
                                     <h4 className="text-[#007580] text-lg font-medium capitalize">{feature.title}</h4>
                                     <button 
-                                        onClick={() => {
-                                            if (user) {
-                                                addToCart(feature);
-                                            } else {
-                                                alert('Please login to add items to cart');
-                                            }
-                                        }}
+                                        onClick={() =>addToCart(feature)}
                                         className="bg-[#007580] hover:bg-[#005f67] h-11 w-11 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50"
                                     >
                                         <ShoppingCart size={20} color="#fff" />
@@ -184,13 +178,7 @@ const features = [
                                         <div className="flex items-center justify-between mb-3">
                                             <h4 className="text-[#007580] text-lg font-medium capitalize">{feature.title}</h4>
                                             <button 
-                                                onClick={() => {
-                                                    if (user) {
-                                                        addToCart(feature);
-                                                    } else {
-                                                        alert('Please login to add items to cart');
-                                                    }
-                                                }}
+                                                onClick={() => addToCart(feature)}
                                                 className="bg-[#007580] hover:bg-[#005f67] h-11 w-11 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50"
                                             >
                                                 <ShoppingCart size={20} color="#fff" />
@@ -271,13 +259,7 @@ const TopCategories = ({ addToCart, addToWishlist, user, filteredProducts }) => 
                                         <p className="text-lg font-semibold mt-2">${category.price}</p>
                                     </div>
                                     <button 
-                                        onClick={() => {
-                                            if (user) {
-                                                addToCart(category);
-                                            } else {
-                                                alert('Please login to add items to cart');
-                                            }
-                                        }}
+                                        onClick={() => addToCart(category)}
                                         className="bg-[#007580] hover:bg-[#005f67] h-12 w-12 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50"
                                     >
                                         <ShoppingCart size={20} color="#fff" />
@@ -384,13 +366,7 @@ const OurProducts = ({ addToCart, addToWishlist, user, filteredProducts }) => {
                                 <div className="flex items-center justify-between mb-3">
                                     <h4 className="text-[#007580] text-lg font-medium capitalize">{product.title}</h4>
                                     <button 
-                                        onClick={() => {
-                                            if (user) {
-                                                addToCart(product);
-                                            } else {
-                                                alert('Please login to add items to cart');
-                                            }
-                                        }}
+                                        onClick={() => addToCart(product)}
                                         className="bg-[#007580] hover:bg-[#005f67] h-11 w-11 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50"
                                     >
                                         <ShoppingCart size={20} color="#fff" />
@@ -460,9 +436,6 @@ const App1 = ({
         : [];
 
     const handleLogout = () => {
-        setUser(null);
-        setCartItems([]);
-        setWishlistItems([]);
         setIsAccountOpen(false);
     };
 
