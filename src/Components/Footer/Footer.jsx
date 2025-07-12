@@ -1,111 +1,153 @@
-import { Armchair, Banknote, CreditCard, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Armchair, Banknote, CreditCard, Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="footer_top w-full border-t border-b border-[#ffffff] pt-8 pb-8 md:pt-16 md:pb-12 lg:pt-20 lg:pb-15 bg-[#122331]">
+        <footer className="relative overflow-hidden">
+            {/* Decorative background elements */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#122331] via-[#1a2d3d] to-[#0f1e2b]"></div>
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#029fae] to-transparent"></div>
+            
+            <div className="footer_top relative w-full pt-12 pb-8 md:pt-20 md:pb-12 lg:pt-24 lg:pb-16">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                         
                         {/* Logo and Description Section */}
                         <div className="sm:col-span-2 lg:col-span-1">
-                            <div className="logo_wrapper mb-6 lg:mb-7">
-                                <Link to='/' className="text-2xl md:text-3xl text-white font-inter font-medium capitalize flex items-center gap-2">
-                                    <Armchair size='1.75rem' className="md:w-8 md:h-8" color="#029fae" /> 
+                            <div className="logo_wrapper mb-6 lg:mb-8">
+                                <Link to='/' className="group text-2xl md:text-3xl text-white font-inter font-bold capitalize flex items-center gap-3 hover:text-[#029fae] transition-all duration-300">
+                                    <div className="p-2 rounded-xl bg-[#029fae]/10 group-hover:bg-[#029fae]/20 transition-colors duration-300">
+                                        <Armchair size='1.75rem' className="md:w-8 md:h-8" color="#029fae" />
+                                    </div>
                                     VELOUR
                                 </Link>
                             </div>
 
-                            <p className="text-sm md:text-base text-[#ffffff] font-inter font-normal mb-4 lg:mb-4 max-w-[350px]">
+                            <p className="text-sm md:text-base text-[#b8bcc8] font-inter font-normal mb-6 lg:mb-8 max-w-[350px] leading-relaxed">
                                 Crafting exceptional furniture since 1985. We believe every piece should tell a story of quality, comfort, and timeless design. From handpicked materials to meticulous craftsmanship, Velour transforms houses into homes.
                             </p>
 
-                            <div className="footer_social flex items-center gap-2 md:gap-3">
-                                <Link className="p-2 md:p-3 rounded-full border-none inline-block border-[1px] hover:bg-gray-100 hover:text-[#007580] transition-colors">
-                                    <Facebook size='1.25rem' className="md:w-6 md:h-6" />
-                                </Link>
-                                <Link className="p-2 md:p-3 inline-block hover:bg-gray-100 hover:text-[#007580] rounded-full transition-colors">
-                                    <Twitter size='1.25rem' className="md:w-6 md:h-6" />
-                                </Link>
-                                <Link className="p-2 md:p-3 inline-block hover:bg-gray-100 hover:text-[#007580] rounded-full transition-colors">
-                                    <Instagram size='1.25rem' className="md:w-6 md:h-6" />
-                                </Link>
-                                <Link className="p-2 md:p-3 inline-block hover:bg-gray-100 hover:text-[#007580] rounded-full transition-colors">
-                                    <Youtube size='1.25rem' className="md:w-6 md:h-6"/>
-                                </Link>
+                            {/* Contact Info */}
+                            <div className="contact_info space-y-3 mb-6">
+                                <div className="flex items-center gap-3 text-[#b8bcc8] text-sm">
+                                    <MapPin size="1rem" className="text-[#029fae] flex-shrink-0" />
+                                    <span>123 Furniture Ave, Design District</span>
+                                </div>
+                                <div className="flex items-center gap-3 text-[#b8bcc8] text-sm">
+                                    <Phone size="1rem" className="text-[#029fae] flex-shrink-0" />
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                                <div className="flex items-center gap-3 text-[#b8bcc8] text-sm">
+                                    <Mail size="1rem" className="text-[#029fae] flex-shrink-0" />
+                                    <span>hello@velour.com</span>
+                                </div>
+                            </div>
+
+                            <div className="footer_social flex items-center gap-3">
+                                {[
+                                    { icon: Facebook, label: "Facebook" },
+                                    { icon: Twitter, label: "Twitter" },
+                                    { icon: Instagram, label: "Instagram" },
+                                    { icon: Youtube, label: "YouTube" }
+                                ].map(({ icon: label }) => (
+                                    <Link 
+                                        key={label}
+                                        className="group p-3 rounded-full bg-[#1e3445] hover:bg-[#029fae] transition-all duration-300 transform hover:scale-110"
+                                        aria-label={label}
+                                    >
+                                        <Icon size='1.25rem' className="text-[#b8bcc8] group-hover:text-white transition-colors duration-300" />
+                                    </Link>
+                                ))}
                             </div>
                         </div>
 
                         {/* Category Section */}
                         <div className="footer_wrapper">
-                            <h3 className="text-lg md:text-xl text-[#9a9caa] font-inter font-medium uppercase mb-3 md:mb-4">
-                                category
+                            <h3 className="text-lg md:text-xl text-white font-inter font-semibold uppercase mb-4 md:mb-6 relative">
+                                Categories
+                                <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-[#029fae] rounded-full"></div>
                             </h3>
-                            <ul className="space-y-1.5 md:space-y-2">
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">sofa</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">armchair</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">wing chair</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">desk chair</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">wooden chair</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">park bench</Link></li>
+                            <ul className="space-y-3 md:space-y-3.5">
+                                {["Sofa", "Armchair", "Wing Chair", "Desk Chair", "Wooden Chair", "Park Bench"].map((item) => (
+                                    <li key={item}>
+                                        <Link className="group text-sm md:text-base text-[#b8bcc8] font-inter font-normal capitalize hover:text-[#029fae] transition-all duration-300 flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#029fae] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                                            {item}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
                         {/* Support Section */}
                         <div className="footer_wrapper">
-                            <h3 className="text-lg md:text-xl text-[#9a9caa] font-inter font-medium uppercase mb-3 md:mb-4">
-                                support
+                            <h3 className="text-lg md:text-xl text-white font-inter font-semibold uppercase mb-4 md:mb-6 relative">
+                                Support
+                                <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-[#029fae] rounded-full"></div>
                             </h3>
-                            <ul className="space-y-1.5 md:space-y-2">
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">help & support</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">terms & condition</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">privacy policy</Link></li>
-                                <li><Link className="text-sm md:text-base text-[#ffffff] font-inter font-normal capitalize hover:text-[#007580] transition-colors">help</Link></li>
+                            <ul className="space-y-3 md:space-y-3.5">
+                                {["Help & Support", "Terms & Conditions", "Privacy Policy", "FAQ", "Shipping Info", "Returns"].map((item) => (
+                                    <li key={item}>
+                                        <Link className="group text-sm md:text-base text-[#b8bcc8] font-inter font-normal capitalize hover:text-[#029fae] transition-all duration-300 flex items-center gap-2">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#029fae] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                                            {item}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
                         {/* Newsletter Section */}
                         <div className="newsletter sm:col-span-2 lg:col-span-1">
-                            <h3 className="text-lg md:text-xl text-[#9a9caa] font-inter font-medium uppercase mb-3 md:mb-4">
-                                newsletter
+                            <h3 className="text-lg md:text-xl text-white font-inter font-semibold uppercase mb-4 md:mb-6 relative">
+                                Newsletter
+                                <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-[#029fae] rounded-full"></div>
                             </h3>
-                            <form action="#" className="w-full">
-                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                                    <input 
-                                        type="email" 
-                                        placeholder="Your Email.." 
-                                        className="flex-1 min-w-0 h-[46px] border-[#e1e3e5] border-[1px] rounded-lg px-3 text-sm focus:outline-none focus:border-[#007580] focus:ring-1 focus:ring-[#007580]" 
-                                    />
+                            <p className="text-sm text-[#b8bcc8] mb-6 leading-relaxed">
+                                Stay updated with our latest furniture collections, exclusive offers, and design tips.
+                            </p>
+                            <div className="w-full">
+                                <div className="flex flex-col gap-3">
+                                    <div className="relative">
+                                        <input 
+                                            type="email" 
+                                            placeholder="Enter your email address" 
+                                            className="w-full h-12 bg-[#1e3445] border-2 border-[#2a4554] rounded-lg px-4 text-sm text-white placeholder-[#7a8795] focus:outline-none focus:border-[#029fae] focus:ring-2 focus:ring-[#029fae]/20 transition-all duration-300" 
+                                        />
+                                        <Mail className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#7a8795] w-4 h-4" />
+                                    </div>
                                     <button 
-                                        type="submit" 
-                                        className="text-sm md:text-base text-white font-semibold capitalize px-4 sm:px-6 h-[46px] bg-[#007580] rounded-lg cursor-pointer hover:bg-[#006570] transition-colors whitespace-nowrap"
+                                        type="button" 
+                                        className="w-full h-12 bg-gradient-to-r from-[#029fae] to-[#027a85] text-white font-semibold rounded-lg cursor-pointer hover:from-[#027a85] hover:to-[#025d66] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#029fae]/25"
                                     >
-                                        Subscribe
+                                        Subscribe Now
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Footer Bottom */}
-            <div className="footer_bottom w-full py-4 md:py-6">
+            <div className="footer_bottom relative w-full py-6 md:py-8 border-t border-[#2a4554]">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="text-center sm:text-left">
-                            <p className="text-xs md:text-base text-[#9a9caa] font-normal font-inter">
-                                @  2025 Velour. All rights reserved. <span className="text-[#272343]"> Legendary Empire</span>
+                            <p className="text-sm md:text-base text-[#7a8795] font-normal font-inter">
+                                © 2025 Velour. All rights reserved. 
+                                <span className="text-[#029fae] font-semibold hover:text-[#027a85] transition-colors cursor-pointer"> Legendary Empire</span>
                             </p> 
                         </div>
-                        <div className="flex items-center gap-2 md:gap-3.5 text-center">
-                            <p className="flex items-center gap-1 md:gap-2 text-[#9a9caa] text-sm md:text-xl">
-                                Bank Note <Banknote size='1.25rem' className="md:w-8 md:h-8" />
-                            </p>
-                            <p className="flex items-center gap-1 md:gap-2 text-[#9a9caa] text-sm md:text-xl">
-                                Credit Card <CreditCard size='1.25rem' className="md:w-8 md:h-8" />
-                            </p>
+                        <div className="flex items-center gap-4 md:gap-6">
+                            <div className="flex items-center gap-2 text-[#7a8795] text-sm md:text-base hover:text-[#029fae] transition-colors cursor-pointer">
+                                <Banknote size='1.25rem' className="md:w-6 md:h-6" />
+                                <span>Bank Transfer</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[#7a8795] text-sm md:text-base hover:text-[#029fae] transition-colors cursor-pointer">
+                                <CreditCard size='1.25rem' className="md:w-6 md:h-6" />
+                                <span>Credit Card</span>
+                            </div>
                         </div>
                     </div>
                 </div>
