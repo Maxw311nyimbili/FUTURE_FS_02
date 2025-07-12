@@ -1,6 +1,6 @@
 import { X, LogIn, Heart, ShoppingCart } from "lucide-react";
 
-const LoginPromptModal = ({ isOpen, onClose, action }) => {
+const LoginPromptModal = ({ isOpen, onClose, action, onLoginClick }) => {
     if (!isOpen) return null;
 
     const getModalContent = () => {
@@ -66,7 +66,10 @@ const LoginPromptModal = ({ isOpen, onClose, action }) => {
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <button
-                            onClick={onClose}
+                            onClick={() => {
+                                onClose();
+                                onLoginClick();
+                            }}
                             className="px-6 py-3 bg-gradient-to-r from-[#029fae] to-[#027a85] hover:from-[#027a85] hover:to-[#025d66] text-white rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                         >
                             <LogIn className="w-5 h-5" />

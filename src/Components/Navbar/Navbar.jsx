@@ -187,8 +187,8 @@ const Navbar = ({
   user, 
   onLogin, 
   onLogout, 
-  loginFunction,      // Add these props
-  registerFunction,   // Add these props
+  loginFunction,      
+  registerFunction,  
   cartItems = [],
   wishlistItems = [],
   orders = [],
@@ -205,6 +205,9 @@ const Navbar = ({
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
+  const [isLoginPromptOpen, setIsLoginPromptOpen] = useState(false);
+  const [loginPromptAction, setLoginPromptAction] = useState('');
+
   
   const [authMode, setAuthMode] = useState('login');
   const [formData, setFormData] = useState({
@@ -597,6 +600,19 @@ const Navbar = ({
         onClose={() => setIsOrdersOpen(false)}
         orders={orders}
       />
+
+      <LoginPromptModal 
+        isOpen={isLoginPromptOpen}
+        onClose={() => setIsLoginPromptOpen(false)}
+        action={loginPromptAction}
+        onLoginClick={() => {
+          setIsAuthModalOpen(true);     
+          setIsLoginPromptOpen(false);
+          setAuthMode('login');
+        }}
+      />
+
+
     </>
   );
 };
