@@ -178,10 +178,6 @@ const Banner = () => {
                                     <span className="truncate text-sm md:text-base">Learn More</span>
                                 </button>
 
-                                <VelourModal 
-                                    isOpen={isModalOpen} 
-                                    onClose={() => setIsModalOpen(false)} 
-                                />
                             </div>
                         </div>
 
@@ -456,11 +452,17 @@ const Brand = () => {
 
 // Main App component showing all three components
 const App = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <div className="w-full">
             <Banner />
             <Delivery />
             <Brand />
+            <VelourModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+            />
         </div>
     );
 };
