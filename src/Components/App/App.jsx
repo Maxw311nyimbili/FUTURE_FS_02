@@ -458,7 +458,7 @@ const App = () => {
 
     return (
         <div className="w-full">
-            <Banner />
+            <Banner setIsModalOpen={setIsModalOpen} />
             <Delivery />
             <Brand />
             <VelourModal 

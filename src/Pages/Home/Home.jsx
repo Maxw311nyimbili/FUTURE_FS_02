@@ -16,13 +16,12 @@ const Home = ({
     searchQuery,
     orders,
 }) => {
-     const [ setIsModalOpen] = useState(false);
     return (
         <div>
 
             {/* Combined Banner, Delivery & Brand Components */}
             <div className="w-full">
-                <App setIsModalOpen={setIsModalOpen} />
+                <App />
             </div>
 
             <div className="w-full">
