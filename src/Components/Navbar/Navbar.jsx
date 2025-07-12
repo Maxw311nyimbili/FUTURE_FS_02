@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle, Package } from "lucide-react";
 import { CartModal, AccountModal, WishlistModal, OrdersModal } from '../modals/modals.jsx';
-import { LoginPromptModal } from '../LoginPromptModal/LoginPromptModal.jsx';
-
 
 const AuthModal = ({ 
   isOpen, 
@@ -207,9 +205,6 @@ const Navbar = ({
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
-  const [isLoginPromptOpen, setIsLoginPromptOpen] = useState(false);
-  const [loginPromptAction, setLoginPromptAction] = useState('');
-
   
   const [authMode, setAuthMode] = useState('login');
   const [formData, setFormData] = useState({
@@ -602,19 +597,6 @@ const Navbar = ({
         onClose={() => setIsOrdersOpen(false)}
         orders={orders}
       />
-
-      <LoginPromptModal 
-        isOpen={isLoginPromptOpen}
-        onClose={() => setIsLoginPromptOpen(false)}
-        action={loginPromptAction}
-        onLoginClick={() => {
-          setIsAuthModalOpen(true);     
-          setIsLoginPromptOpen(false);
-          setAuthMode('login');
-        }}
-      />
-
-
     </>
   );
 };

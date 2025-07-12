@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal.jsx';
+import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal';
 
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
@@ -24,7 +24,6 @@ const MainLayout = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const [loginModalAction, setLoginModalAction] = useState('');
-    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     // Show loading screen while checking authentication
     if (loading) {
@@ -58,7 +57,6 @@ const MainLayout = () => {
         if (!user) {
             setLoginModalAction('cart');
             setLoginModalOpen(true);
-    
             return;
         }
 
@@ -126,6 +124,7 @@ const MainLayout = () => {
                 removeFromCart={removeFromCart}
                 removeFromWishlist={removeFromWishlist}
                 addToCart={addToCart}
+
                 loginFunction={login}
                 registerFunction={register}
             />
@@ -168,12 +167,7 @@ const MainLayout = () => {
                 isOpen={loginModalOpen}
                 onClose={() => setLoginModalOpen(false)}
                 action={loginModalAction}
-                onLoginClick={() => {
-                    setLoginModalOpen(false);
-                    setIsAuthModalOpen(true); 
-                }}
             />
-
 
             <Footer />
         </BrowserRouter>
