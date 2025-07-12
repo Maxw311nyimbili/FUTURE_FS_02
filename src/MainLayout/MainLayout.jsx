@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
+import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal';
 // Layout Components
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
@@ -22,6 +22,8 @@ const MainLayout = () => {
     const [wishlistItems, setWishlistItems] = useState([]);
     const [orders, setOrders] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loginModalOpen, setLoginModalOpen] = useState(false);
+    const [loginModalAction, setLoginModalAction] = useState('');
 
     // Show loading screen while checking authentication
     if (loading) {
@@ -39,7 +41,7 @@ const MainLayout = () => {
     const handleLogin = async (userData) => {
         // This is called from the Navbar component after successful login
         console.log('User logged in:', userData);
-        // Any additional logic after login can go here
+      
     };
 
     const handleLogout = async () => {
@@ -54,27 +56,28 @@ const MainLayout = () => {
 
     // Cart handlers
     const addToCart = (product) => {
-        if (!user) {
-            alert('Please login to add items to cart');
-            return;
-        }
+    if (!user) {
+        setLoginModalAction('cart');
+        setLoginModalOpen(true);
+        return;
+    }
 
-        const existingItem = cartItems.find(item => item.id === product.id);
-        if (existingItem) {
-            setCartItems(cartItems.map(item =>
-                item.id === product.id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            ));
-        } else {
-            setCartItems([...cartItems, {
-                ...product,
-                quantity: 1,
-                name: product.title,
-                color: 'Default',
-            }]);
-        }
-    };
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+        setCartItems(cartItems.map(item =>
+            item.id === product.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+        ));
+    } else {
+        setCartItems([...cartItems, {
+            ...product,
+            quantity: 1,
+            name: product.title,
+            color: 'Default',
+        }]);
+    }
+};
 
     const updateCartQuantity = (id, quantity) => {
         if (quantity <= 0) {
@@ -93,7 +96,8 @@ const MainLayout = () => {
     // Wishlist handlers
     const addToWishlist = (product) => {
         if (!user) {
-            alert('Please login to add items to wishlist');
+            setLoginModalAction('wishlist');
+            setLoginModalOpen(true);
             return;
         }
 
@@ -160,6 +164,12 @@ const MainLayout = () => {
                 </Route>
                 <Route path="*" element={<Error />} />
             </Routes>
+
+             <LoginPromptModal 
+                isOpen={loginModalOpen}
+                onClose={() => setLoginModalOpen(false)}
+                action={loginModalAction}
+            />
 
             <Footer />
         </BrowserRouter>
