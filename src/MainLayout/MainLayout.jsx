@@ -20,10 +20,26 @@ const MainLayout = () => {
     const { user, loading, login, register, logout } = useAuth();
     const [cartItems, setCartItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
-    const [orders, setOrders] = useState([]);
+
     const [searchQuery, setSearchQuery] = useState('');
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const [loginModalAction, setLoginModalAction] = useState('');
+    const [setShowConfirmation] = useState(false);
+    const [setIsCheckingOut] = useState(false);
+
+    const [orders, setOrders] = useState([
+    // Example order data structure
+    {
+        id: "ORD-001",
+        date: "2025-01-15",
+        status: "delivered",
+        items: [
+        { name: "Modern Sofa", quantity: 1, price: "899.99" },
+        { name: "Coffee Table", quantity: 1, price: "299.99" }
+        ],
+        total: "1199.98"
+    }
+    ]);
 
     // Show loading screen while checking authentication
     if (loading) {
@@ -76,6 +92,53 @@ const MainLayout = () => {
             }]);
         }
     };
+
+    const handleCheckoutSuccess = (orderDetails, cartItems) => {
+        // Create new order
+        const newOrder = {
+            id: `ORD-${Date.now()}`,
+            date: new Date().toISOString().split('T')[0],
+            status: "processing",
+            items: cartItems.map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: (item.price * item.quantity).toFixed(2)
+            })),
+            total: orderDetails.total
+        };
+
+        // Add order to orders list
+        setOrders(prevOrders => [newOrder, ...prevOrders]);
+
+        // Clear cart after successful checkout
+        setCartItems([]);
+    };
+
+
+
+    const handleConfirmOrder = async () => {
+        setShowConfirmation(false);
+        setIsCheckingOut(true);
+
+        const orderDetails = {
+            id: Date.now(),
+            date: new Date().toLocaleDateString(),
+            total: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+            items: cartItems,
+        };
+
+        setTimeout(() => {
+            setIsCheckingOut(false);
+
+            if (handleCheckoutSuccess) {
+                handleCheckoutSuccess(orderDetails, cartItems);
+            }
+
+            alert('Order placed successfully!');
+        }, 2000);
+    };
+
+
 
     const updateCartQuantity = (id, quantity) => {
         if (quantity <= 0) {
@@ -145,6 +208,8 @@ const MainLayout = () => {
                                 removeFromWishlist={removeFromWishlist}
                                 searchQuery={searchQuery}
                                 orders={orders}
+                                onCheckoutSuccess={handleCheckoutSuccess}
+                                onConfirm={handleConfirmOrder}
                             />
                         </AuthCheck>
                     }

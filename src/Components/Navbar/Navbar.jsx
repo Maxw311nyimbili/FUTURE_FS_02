@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle, Package } from "lucide-react";
-import { CartModal, AccountModal, WishlistModal, OrdersModal } from '../modals/modals.jsx';
+import { CartModal, AccountModal, WishlistModal, OrdersModal, CheckoutConfirmationModal } from '../modals/modals.jsx';
 
 const AuthModal = ({ 
   isOpen, 
@@ -197,7 +197,9 @@ const Navbar = ({
   removeFromWishlist,
   addToCart,
   searchQuery,
-  onSearchChange
+  onSearchChange,
+  handleCheckoutSuccess,
+  handleConfirmOrder
 }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -568,6 +570,8 @@ const Navbar = ({
         updateCartQuantity={updateCartQuantity}
         removeFromCart={removeFromCart}
         user={user}
+        onCheckoutSuccess={handleCheckoutSuccess}
+        onConfirmOrder={handleConfirmOrder}
       />
 
       {/* Account Modal */}

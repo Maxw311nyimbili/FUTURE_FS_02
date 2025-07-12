@@ -1,9 +1,124 @@
 import { useState } from "react";
 import { X, Plus, Minus, Trash2, Heart, ShoppingCart, User, Package, CreditCard, MapPin, Phone, Mail, Calendar, CheckCircle, AlertCircle } from "lucide-react";
 
-// Cart Modal Component
+// Checkout Confirmation Modal Component
+const CheckoutConfirmationModal = ({ isOpen, onClose, onConfirm, orderDetails, user }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+        {/* Header */}
+        <div className="p-6 border-b border-gray-100">
+          <h2 className="text-xl font-semibold text-[#272343] flex items-center gap-2">
+            <CheckCircle size="24px" color="#029fae" />
+            Confirm Your Order
+          </h2>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <div className="space-y-4">
+            {/* Order Summary */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h3 className="font-medium text-[#272343] mb-3">Order Summary</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-[#636270]">Items ({orderDetails.itemCount})</span>
+                  <span className="text-[#272343]">${orderDetails.subtotal}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#636270]">Tax</span>
+                  <span className="text-[#272343]">${orderDetails.tax}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#636270]">Shipping</span>
+                  <span className="text-[#272343]">{orderDetails.shipping === 0 ? 'Free' : `$${orderDetails.shipping}`}</span>
+                </div>
+                <hr className="my-2" />
+                <div className="flex justify-between font-semibold text-base">
+                  <span className="text-[#272343]">Total</span>
+                  <span className="text-[#029fae]">${orderDetails.total}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Delivery Info */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h3 className="font-medium text-[#272343] mb-3">Delivery Information</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <User size="16px" color="#636270" />
+                  <span className="text-[#272343]">{user?.name}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail size="16px" color="#636270" />
+                  <span className="text-[#272343]">{user?.email}</span>
+                </div>
+                {user?.phone && (
+                  <div className="flex items-center gap-2">
+                    <Phone size="16px" color="#636270" />
+                    <span className="text-[#272343]">{user?.phone}</span>
+                  </div>
+                )}
+                {user?.address && (
+                  <div className="flex items-start gap-2">
+                    <MapPin size="16px" color="#636270" className="mt-0.5" />
+                    <span className="text-[#272343]">{user?.address}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Estimated Delivery */}
+            <div className="bg-blue-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Package size="16px" color="#029fae" />
+                <h3 className="font-medium text-[#272343]">Estimated Delivery</h3>
+              </div>
+              <p className="text-sm text-[#636270]">
+                {orderDetails.shipping === 0 ? '3-5 business days' : '5-7 business days'}
+              </p>
+            </div>
+
+            {/* Payment Method */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <CreditCard size="16px" color="#636270" />
+                <h3 className="font-medium text-[#272343]">Payment Method</h3>
+              </div>
+              <p className="text-sm text-[#636270]">Payment will be processed securely</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-6 border-t border-gray-100">
+          <div className="flex gap-3">
+            <button
+              onClick={onClose}
+              className="flex-1 bg-gray-100 text-[#272343] py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onConfirm}
+              className="flex-1 bg-[#029fae] text-white py-3 rounded-lg hover:bg-[#027a85] transition-colors font-medium flex items-center justify-center gap-2"
+            >
+              <CheckCircle size="20px" />
+              Confirm Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Cart Modal Component (Updated)
 const CartModal = ({ isOpen, onClose, cartItems, updateCartQuantity, removeFromCart, user }) => {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   if (!isOpen) return null;
 
@@ -12,13 +127,27 @@ const CartModal = ({ isOpen, onClose, cartItems, updateCartQuantity, removeFromC
   const shipping = subtotal > 100 ? 0 : 15; // Free shipping over $100
   const total = subtotal + tax + shipping;
 
+  const orderDetails = {
+    itemCount: cartItems.length,
+    subtotal: subtotal.toFixed(2),
+    tax: tax.toFixed(2),
+    shipping: shipping.toFixed(2),
+    total: total.toFixed(2)
+  };
+
   const handleCheckout = async () => {
     if (!user) {
       alert('Please sign in to checkout');
       return;
     }
     
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmOrder = async () => {
+    setShowConfirmation(false);
     setIsCheckingOut(true);
+    
     // Simulate checkout process
     setTimeout(() => {
       setIsCheckingOut(false);
@@ -28,132 +157,143 @@ const CartModal = ({ isOpen, onClose, cartItems, updateCartQuantity, removeFromC
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-[#272343] flex items-center gap-2">
-            <ShoppingCart size="24px" color="#029fae" />
-            Shopping Cart ({cartItems.length})
-          </h2>
-          <button 
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <X size="20px" color="#636270" />
-          </button>
-        </div>
+    <>
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-100">
+            <h2 className="text-xl font-semibold text-[#272343] flex items-center gap-2">
+              <ShoppingCart size="24px" color="#029fae" />
+              Shopping Cart ({cartItems.length})
+            </h2>
+            <button 
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <X size="20px" color="#636270" />
+            </button>
+          </div>
 
-        {/* Cart Content */}
-        <div className="flex flex-col h-full max-h-[calc(90vh-80px)]">
-          {cartItems.length === 0 ? (
-            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-              <ShoppingCart size="64px" color="#e5e7eb" className="mb-4" />
-              <h3 className="text-lg font-medium text-[#272343] mb-2">Your cart is empty</h3>
-              <p className="text-sm text-[#636270] mb-4">Add some products to get started</p>
-              <button 
-                onClick={onClose}
-                className="bg-[#029fae] text-white px-6 py-2 rounded-lg hover:bg-[#027a85] transition-colors"
-              >
-                Continue Shopping
-              </button>
-            </div>
-          ) : (
-            <>
-              {/* Cart Items */}
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="space-y-4">
-                  {cartItems.map((item) => (
-                    <div key={item.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <Package size="24px" color="#636270" />
-                      </div>
-                      
-                      <div className="flex-1">
-                        <h4 className="font-medium text-[#272343]">{item.name}</h4>
-                        <p className="text-sm text-[#636270]">{item.category}</p>
-                        <p className="text-lg font-semibold text-[#029fae]">${item.price}</p>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                          className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
-                          disabled={item.quantity <= 1}
-                        >
-                          <Minus size="16px" color="#636270" />
-                        </button>
-                        <span className="w-8 text-center font-medium">{item.quantity}</span>
-                        <button
-                          onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                          className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
-                        >
-                          <Plus size="16px" color="#636270" />
-                        </button>
-                      </div>
-
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="p-2 hover:bg-red-100 rounded-lg transition-colors"
-                      >
-                        <Trash2 size="16px" color="#ef4444" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Order Summary */}
-              <div className="border-t border-gray-100 p-6 bg-gray-50">
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-[#636270]">Subtotal</span>
-                    <span className="text-[#272343]">${subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-[#636270]">Tax</span>
-                    <span className="text-[#272343]">${tax.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-[#636270]">Shipping</span>
-                    <span className="text-[#272343]">${shipping.toFixed(2)}</span>
-                  </div>
-                  <hr className="my-2" />
-                  <div className="flex justify-between text-lg font-semibold">
-                    <span className="text-[#272343]">Total</span>
-                    <span className="text-[#029fae]">${total.toFixed(2)}</span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={handleCheckout}
-                  disabled={isCheckingOut || !user}
-                  className="w-full bg-[#029fae] text-white py-3 rounded-lg hover:bg-[#027a85] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          {/* Cart Content */}
+          <div className="flex flex-col h-full max-h-[calc(90vh-80px)]">
+            {cartItems.length === 0 ? (
+              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
+                <ShoppingCart size="64px" color="#e5e7eb" className="mb-4" />
+                <h3 className="text-lg font-medium text-[#272343] mb-2">Your cart is empty</h3>
+                <p className="text-sm text-[#636270] mb-4">Add some products to get started</p>
+                <button 
+                  onClick={onClose}
+                  className="bg-[#029fae] text-white px-6 py-2 rounded-lg hover:bg-[#027a85] transition-colors"
                 >
-                  {isCheckingOut ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Processing...
-                    </>
-                  ) : (
-                    <>
-                      <CreditCard size="20px" />
-                      Checkout
-                    </>
-                  )}
+                  Continue Shopping
                 </button>
-                
-                {!user && (
-                  <p className="text-xs text-[#636270] text-center mt-2">
-                    Please sign in to checkout
-                  </p>
-                )}
               </div>
-            </>
-          )}
+            ) : (
+              <>
+                {/* Cart Items */}
+                <div className="flex-1 overflow-y-auto p-6">
+                  <div className="space-y-4">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                        <div className="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
+                          <Package size="24px" color="#636270" />
+                        </div>
+                        
+                        <div className="flex-1">
+                          <h4 className="font-medium text-[#272343]">{item.name}</h4>
+                          <p className="text-sm text-[#636270]">{item.category}</p>
+                          <p className="text-lg font-semibold text-[#029fae]">${item.price}</p>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                            className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+                            disabled={item.quantity <= 1}
+                          >
+                            <Minus size="16px" color="#636270" />
+                          </button>
+                          <span className="w-8 text-center font-medium">{item.quantity}</span>
+                          <button
+                            onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                            className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+                          >
+                            <Plus size="16px" color="#636270" />
+                          </button>
+                        </div>
+
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="p-2 hover:bg-red-100 rounded-lg transition-colors"
+                        >
+                          <Trash2 size="16px" color="#ef4444" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Order Summary */}
+                <div className="border-t border-gray-100 p-6 bg-gray-50">
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-[#636270]">Subtotal</span>
+                      <span className="text-[#272343]">${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-[#636270]">Tax</span>
+                      <span className="text-[#272343]">${tax.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-[#636270]">Shipping</span>
+                      <span className="text-[#272343]">${shipping.toFixed(2)}</span>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="flex justify-between text-lg font-semibold">
+                      <span className="text-[#272343]">Total</span>
+                      <span className="text-[#029fae]">${total.toFixed(2)}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleCheckout}
+                    disabled={isCheckingOut || !user}
+                    className="w-full bg-[#029fae] text-white py-3 rounded-lg hover:bg-[#027a85] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {isCheckingOut ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <CreditCard size="20px" />
+                        Checkout
+                      </>
+                    )}
+                  </button>
+                  
+                  {!user && (
+                    <p className="text-xs text-[#636270] text-center mt-2">
+                      Please sign in to checkout
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Confirmation Modal */}
+      <CheckoutConfirmationModal
+        isOpen={showConfirmation}
+        onClose={() => setShowConfirmation(false)}
+        onConfirm={handleConfirmOrder}
+        orderDetails={orderDetails}
+        user={user}
+      />
+    </>
   );
 };
 
@@ -512,4 +652,4 @@ const OrdersModal = ({ isOpen, onClose, orders }) => {
   );
 };
 
-export { CartModal, AccountModal, WishlistModal, OrdersModal };
+export { CartModal, AccountModal, WishlistModal, OrdersModal, CheckoutConfirmationModal };
