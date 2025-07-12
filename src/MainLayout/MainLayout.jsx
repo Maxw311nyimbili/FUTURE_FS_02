@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal';
-// Layout Components
+
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
 
@@ -37,16 +37,14 @@ const MainLayout = () => {
         );
     }
 
-    // Auth handlers
     const handleLogin = async (userData) => {
-        // This is called from the Navbar component after successful login
+
         console.log('User logged in:', userData);
       
     };
 
     const handleLogout = async () => {
         await logout();
-        // Clear user-specific data
         setCartItems([]);
         setWishlistItems([]);
         setOrders([]);
@@ -126,7 +124,6 @@ const MainLayout = () => {
                 removeFromCart={removeFromCart}
                 removeFromWishlist={removeFromWishlist}
                 addToCart={addToCart}
-                // Pass login and register functions to Navbar
                 loginFunction={login}
                 registerFunction={register}
             />
