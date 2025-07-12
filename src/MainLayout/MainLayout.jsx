@@ -24,6 +24,7 @@ const MainLayout = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const [loginModalAction, setLoginModalAction] = useState('');
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
     // Show loading screen while checking authentication
     if (loading) {
@@ -169,7 +170,7 @@ const MainLayout = () => {
                 action={loginModalAction}
                 onLoginClick={() => {
                     setLoginModalOpen(false);
-                    window.location.href = '/auth/login'; 
+                    setIsAuthModalOpen(true); 
                 }}
             />
 
