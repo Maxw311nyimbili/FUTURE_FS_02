@@ -55,7 +55,6 @@ const MainLayout = () => {
     // Cart handlers
     const addToCart = (product) => {
         if (!user) {
-            setLoginModalAction('cart');
             setLoginModalOpen(true);
             return;
         }
