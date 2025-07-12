@@ -221,3 +221,5 @@ const VelourModal = ({ isOpen, onClose }) => {
         </div>
     );
 };
+
+export { VelourModal };
