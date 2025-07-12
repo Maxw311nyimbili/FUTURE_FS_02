@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Armchair, Heart, Menu, Search, ShoppingCart, User, X, ChevronDown, Plus, Minus, Trash2, Eye, EyeOff, AlertCircle, CheckCircle, Package } from "lucide-react";
 import { CartModal, AccountModal, WishlistModal, OrdersModal } from '../modals/modals.jsx';
-import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal';
+import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal.jsx';
 
 const AuthModal = ({ 
   isOpen, 

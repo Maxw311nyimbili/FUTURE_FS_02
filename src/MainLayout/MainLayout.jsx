@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal';
+import { LoginPromptModal } from '../Components/LoginPromptModal/LoginPromptModal.jsx';
 
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
