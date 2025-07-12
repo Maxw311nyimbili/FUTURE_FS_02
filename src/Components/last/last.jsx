@@ -305,10 +305,10 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                             {
                                 displayFeatures?.map((feature, index) => (
                                     <div key={feature.id} className="px-3 md:px-4 h-full">
-                                        <div className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col border border-gray-100">
-                                            <div className="feature_image relative flex-shrink-0 overflow-hidden">
+                                        <div className="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-105 overflow-hidden h-full flex flex-col">
+                                            <div className="relative overflow-hidden">
                                                 <img 
-                                                    className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-110 transition-transform duration-500" 
+                                                    className="w-full h-64 lg:h-72 object-cover group-hover:scale-110 transition-transform duration-300" 
                                                     src={feature?.image} 
                                                     alt={feature?.title}
                                                     loading="lazy"
@@ -316,50 +316,34 @@ const ClientAndRecentProducts = ({ addToCart, addToWishlist, user }) => {
                                                         e.target.src = 'https://via.placeholder.com/400x300/f0f0f0/888888?text=Chair';
                                                     }}
                                                 />
-                                                {
-                                                    feature?.status && (
-                                                        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-white text-xs font-semibold shadow-lg ${
-                                                            feature?.status === 'New' 
-                                                                ? 'bg-gradient-to-r from-green-500 to-green-600' 
-                                                                : 'bg-gradient-to-r from-red-500 to-red-600'
-                                                        }`}>
-                                                            {feature?.status}
-                                                        </div>
-                                                    )
-                                                }
+                                                {feature?.status && (
+                                                    <div className="absolute top-4 left-4 bg-[#007580] text-white px-3 py-1 rounded-lg shadow-md">
+                                                        <span className="text-sm font-medium">{feature?.status}</span>
+                                                    </div>
+                                                )}
                                                 <button 
                                                     onClick={() => handleAddToWishlist(feature)}
-                                                    className="absolute top-3 right-3 bg-white/95 hover:bg-white p-2.5 rounded-full shadow-lg transition-all duration-200 hover:scale-110 group/wishlist"
+                                                    className="absolute top-4 right-4 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-all duration-200 hover:scale-110"
                                                 >
-                                                    <Heart size={16} className="text-gray-600 group-hover/wishlist:text-red-500 transition-colors duration-200" />
+                                                    <Heart size={18} className="text-[#007580]" />
                                                 </button>
                                             </div>
                                             
-                                            <div className="feature_content p-5 sm:p-6 flex-grow flex flex-col">
-                                                <div className="flex items-start justify-between mb-4 flex-grow">
-                                                    <div className="flex-grow pr-3">
-                                                        <h4 className="text-lg sm:text-xl text-[#272343] capitalize font-inter font-semibold leading-tight mb-2">
-                                                            {feature?.title}
-                                                        </h4>
-                                                        <div className="flex items-center gap-3">
-                                                            <span className="text-xl sm:text-2xl text-[#007580] font-bold font-inter">
-                                                                ${feature?.price}
-                                                            </span>
-                                                            {
-                                                                feature?.originalPrice && (
-                                                                    <span className="text-sm sm:text-base text-gray-400 font-inter line-through">
-                                                                        ${feature?.originalPrice}
-                                                                    </span>
-                                                                )
-                                                            }
-                                                        </div>
-                                                    </div>
+                                            <div className="p-4 flex-grow flex flex-col">
+                                                <div className="flex items-center justify-between mb-3 flex-grow">
+                                                    <h4 className="text-[#007580] text-lg font-medium capitalize">{feature?.title}</h4>
                                                     <button 
                                                         onClick={() => handleAddToCart(feature)}
-                                                        className="bg-gradient-to-r from-[#007580] to-[#005f67] hover:from-[#005f67] hover:to-[#004d54] h-11 w-11 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50 shadow-lg group/cart"
+                                                        className="bg-[#007580] hover:bg-[#005f67] h-11 w-11 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#007580] focus:ring-opacity-50"
                                                     >
-                                                        <ShoppingCart size={18} className="sm:w-5 sm:h-5 text-white group-hover/cart:scale-110 transition-transform duration-200" />
+                                                        <ShoppingCart size={20} color="#fff" />
                                                     </button>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <span className="text-lg font-bold text-[#272343]">${feature?.price}</span>
+                                                    {feature?.originalPrice && (
+                                                        <span className="text-sm text-gray-500 line-through">${feature?.originalPrice}</span>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
