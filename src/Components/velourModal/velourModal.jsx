@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { X, Award, Users, Heart, Truck, ShieldCheck, Clock } from "lucide-react";
 
 const VelourModal = ({ isOpen, onClose }) => {

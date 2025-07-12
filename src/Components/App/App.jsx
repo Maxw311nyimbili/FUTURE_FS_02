@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { MoveRight, ChevronLeft, ChevronRight, Play, Pause, Clock3, Percent, ShieldCheck, Truck } from "lucide-react";
-import VelourModal from '../velourModal/velourModal.jsx'
-const Banner = () => {
+import {VelourModal} from '../velourModal/velourModal.jsx'
+const Banner = ({setIsModalOpen}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
-        const [isModalOpen, setIsModalOpen] = useState(false);
     const intervalRef = useRef(null);
     const bannerRef = useRef(null);
 
@@ -446,8 +445,11 @@ const Brand = () => {
                     }
                 }
             `}</style>
+            
         </div>
     );
+
+    
 };
 
 // Main App component showing all three components

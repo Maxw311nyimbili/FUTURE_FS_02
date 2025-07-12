@@ -1,3 +1,4 @@
+import { useState } from "react"; 
 import ClientAndRecentProducts from "../../Components/last/last";
 import App1 from "../../Components/demo/demo";
 import App from './../../Components/App/App';
@@ -15,12 +16,13 @@ const Home = ({
     searchQuery,
     orders,
 }) => {
+     const [ setIsModalOpen] = useState(false);
     return (
         <div>
 
             {/* Combined Banner, Delivery & Brand Components */}
             <div className="w-full">
-                <App />
+                <App setIsModalOpen={setIsModalOpen} />
             </div>
 
             <div className="w-full">
