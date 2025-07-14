@@ -409,23 +409,23 @@ const App1 = ({
     // All products combined for search
     const allProducts = [
         // Featured products
-        { id: 1, title: 'Library Stool', price: 250, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop' },
-        { id: 2, title: 'Library Stool Chair', price: 200, image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop' },
-        { id: 3, title: 'Library Stool Chair', price: 250, image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop' },
-        { id: 4, title: 'Library Stool Chair', price: 200, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
+        { id: 1, title: 'Industrial Bar Stool', price: 250, image: 'images/products/industrial.webp' },
+        { id: 2, title: 'Vintage Leather Stool', price: 200, image: 'images/products/leather.jpg' },
+        { id: 3, title: 'Bohemian Rattan Stool', price: 180, image: 'images/products/Bohemian.jpg' },
+        { id: 4, title: 'Modern Chrome Stool', price: 200, image: 'images/products/chrome.jpg' },
         // Categories
         { id: 5, title: 'Wing Chair', price: 180, image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop' },
         { id: 6, title: 'Wooden Chair', price: 120, image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop' },
-        { id: 7, title: 'Desk Chair', price: 220, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
+        { id: 7, title: 'Comfort Lounge Chair', price: 220, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
         // Our products
-        { id: 8, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop' },
-        { id: 9, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop' },
-        { id: 10, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
-        { id: 11, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop' },
-        { id: 12, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop' },
-        { id: 13, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=300&fit=crop' },
-        { id: 14, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
-        { id: 15, title: 'Library Stool Chair', price: 99, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop' },
+        { id: 8, title: 'Leather Recliner Chair', price: 99, image: 'images/products/recliner.webp' },
+        { id: 9, title: 'Classic Rocking Chair', price: 99, image: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&h=300&fit=crop' },
+        { id: 10, title: 'Wicker Patio Chair', price: 99, image: 'images/products/wicker.jpg' },
+        { id: 11, title: 'Velvet Accent Chair', price: 99, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop' },
+        { id: 12, title: 'Rattan Armchair', price: 99, image: 'images/products/ratten.jpg' },
+        { id: 13, title: 'Upholstered Club Chair', price: 99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=300&fit=crop' },
+        { id: 14, title: 'Mid-Century Modern Chair', price: 99, image: 'images/products/Mid-Century.jpg' },
+        { id: 15, title: 'Minimalist Office Chair', price: 99, image: 'https://images.unsplash.com/photo-1541558869434-2840d308329a?w=400&h=300&fit=crop' },
     ];
 
     // Filter products based on search query
